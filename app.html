@@ -312,7 +312,14 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
 
   // ── 日付 → その日の一言（N日ごとに並びを変え、同じ句が続かないようにする）──
   const EPOCH = Date.UTC(2026, 0, 1);
-  const dayNum = d => Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - EPOCH) / 864e5);
+  // 一言は毎朝7時に切り替わる。0時〜7時は前日の一言のまま。
+  const ROLLOVER_HOUR = 7;
+  // 確認用: ?now=2026-09-15T06:59 を付けると、その時刻から時計を進めて表示できる
+  const _nowParam = new URLSearchParams(location.search).get('now');
+  const _base = _nowParam ? new Date(_nowParam) : null, _loaded = Date.now();
+  const nowRef = () => (_base && !isNaN(_base)) ? new Date(_base.getTime() + (Date.now() - _loaded)) : new Date();
+  const quoteDate = d => new Date(d.getTime() - ROLLOVER_HOUR * 3600e3);
+  const dayNum = d => { const q = quoteDate(d); return Math.floor((Date.UTC(q.getFullYear(), q.getMonth(), q.getDate()) - EPOCH) / 864e5); };
   const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
   const orders = new Map();
   function orderFor(block){
@@ -340,7 +347,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
 
   // ── 状態 ──
   const state = { tab: 'today', offset: 0, detail: null, region: 'all', onlyMarks: false, query: '', open: new Set() };
-  const todayNum = () => dayNum(new Date());
+  const todayNum = () => dayNum(nowRef());
   const currentQuote = () => state.detail || quoteForDay(todayNum() + state.offset);
 
   // ── 一言カード ──
@@ -349,7 +356,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
     const q = currentQuote(), a = A[q.a], detail = !!state.detail, en = q.e || q.x || '';
     motifEl.innerHTML = `<svg viewBox="0 0 200 150"><use href="#m-${q.m}"/></svg>`;
     if (look() === 'sea') renderScene(q);
-    const d = new Date(); d.setDate(d.getDate() + state.offset);
+    const d = quoteDate(nowRef()); d.setDate(d.getDate() + state.offset);
     const label = state.offset === 0 ? '今日の一言' : state.offset === -1 ? '昨日の一言' : `${-state.offset}日前の一言`;
     const head = detail
       ? `<button class="back" id="backBtn"><svg width="28" height="10" aria-hidden="true"><use href="#i-arrow-l"/></svg>書架に戻る</button>`
@@ -514,7 +521,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
   }
   const sceneEl = $('#scene'), sceneSvgEl = $('#sceneSvg');
   function renderScene(q){
-    const now = new Date(), dbg = new URLSearchParams(location.search).get('hour');
+    const now = nowRef(), dbg = new URLSearchParams(location.search).get('hour');
     const h = dbg ? Number(dbg) : now.getHours(), per = period(h), p = PAL[per];
     sceneSvgEl.innerHTML = sceneSvg(SCENE_OF[q.m] || 'gull', p, per === 'night');
     $('#hdate').textContent = `${now.getMonth()+1}月${now.getDate()}日 ${'日月火水木金土'[now.getDay()]}曜日`;
@@ -532,6 +539,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
   applyLook(store.get('shiori.look', 'sea'));
   document.querySelectorAll('.seg.look button').forEach(b => b.onclick = () => { applyLook(b.dataset.look); store.set('shiori.look', b.dataset.look); if (state.tab === 'today') renderCard(); });
 
+  window.__shiori = { quoteForDay, dayNum, todayNum, nowRef, current: currentQuote };
   setTab('today');
 })();
 </script>
