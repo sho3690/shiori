@@ -59,6 +59,7 @@ button:disabled{cursor:default}
 .meta dt{margin:0;font-size:.8rem;letter-spacing:.2em;color:var(--ink-2)}
 .meta dd{margin:0;font-size:.95rem;line-height:1.6}
 .meta dd .yrs{font-family:var(--serif-lat);font-size:1.02em;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.meta dd.orig{font-family:var(--serif-lat);font-size:.9rem;color:var(--ink-2);line-height:1.6}
 .actions{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
 .act{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 10px 0 4px;font-size:.88rem;letter-spacing:.08em;color:var(--ink-2);border-radius:4px}
 .act svg{width:18px;height:18px;flex:none}
@@ -155,10 +156,9 @@ html[data-look="sea"] body::before{opacity:.18}
 html[data-look="sea"] .arch,html[data-look="sea"] .hair{display:none}
 .scene{position:relative;margin:0 -22px;height:clamp(300px,80vw,390px);overflow:hidden;background:#C3D0DF;color:#2B3142}
 .scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.scene-text{position:absolute;left:22px;top:20px;right:70px}
-.wordmark{font-size:.66rem;letter-spacing:.32em;opacity:.8;font-weight:500}
-.greet{margin:18px 0 6px;font-size:2.7rem;font-weight:700;letter-spacing:.02em;line-height:1.1}
-.gmeta{margin:0;font-size:.8rem;letter-spacing:.12em;font-variant-numeric:tabular-nums;opacity:.85;font-weight:500}
+.scene-text{position:absolute;left:22px;top:30px;right:70px}
+.hdate{margin:0 0 6px;font-size:1.7rem;font-weight:700;letter-spacing:.04em;line-height:1.2}
+.hsub{margin:0;font-size:.8rem;letter-spacing:.14em;font-variant-numeric:tabular-nums;opacity:.85;font-weight:500}
 .top.night .gear{color:#ECEDF3}
 html[data-look="sea"] .gear{top:12px}
 html[data-look="sea"] .top{padding-top:0}
@@ -166,7 +166,7 @@ html[data-look="sea"] .card{padding-top:24px}
 html[data-look="sea"] .date .lbl{font-size:.78rem;font-weight:500;letter-spacing:.22em}
 html[data-look="sea"] .q-text{font-size:clamp(1.3rem,4.9vw,1.6rem);line-height:1.9;font-weight:500;letter-spacing:.01em}
 html[data-look="sea"] .q-text::before,html[data-look="sea"] .q-text::after{content:none}
-html[data-look="sea"] .q-text mark{background:linear-gradient(transparent 62%,var(--mustard) 62%,var(--mustard) 96%,transparent 96%);padding:0 .02em;margin:0}
+html[data-look="sea"] .q-text mark,html[data-look="sea"] .q-row .tx mark{background:none;padding:0;margin:0}
 html[data-look="sea"] .q-orig{font-style:normal;font-weight:400;font-size:.95rem;line-height:1.7}
 html[data-look="sea"] .q-author{font-weight:700;letter-spacing:.12em}
 html[data-look="sea"] .meta dd .yrs{font-size:1em}
@@ -275,7 +275,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
         </div>
         <div class="scene" id="scene" hidden>
           <svg id="sceneSvg" viewBox="0 0 390 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
-          <div class="scene-text"><span class="wordmark">栞 SHIORI</span><p class="greet" id="greet"></p><p class="gmeta" id="gmeta"></p></div>
+          <div class="scene-text"><p class="hdate" id="hdate"></p><p class="hsub" id="hsub"></p></div>
         </div>
         <div class="arch">
           <div class="motif" id="motif" aria-hidden="true"></div>
@@ -346,7 +346,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
   // ── 一言カード ──
   const motifEl = $('#motif'), card = $('#card');
   function renderCard(){
-    const q = currentQuote(), a = A[q.a], detail = !!state.detail;
+    const q = currentQuote(), a = A[q.a], detail = !!state.detail, en = q.e || q.x || '';
     motifEl.innerHTML = `<svg viewBox="0 0 200 150"><use href="#m-${q.m}"/></svg>`;
     if (look() === 'sea') renderScene(q);
     const d = new Date(); d.setDate(d.getDate() + state.offset);
@@ -360,12 +360,13 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
         <button class="nav" id="nextBtn" ${state.offset >= 0 ? 'disabled' : ''}><span class="jp">次の日</span><svg aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
       </nav>`;
     card.innerHTML = `${head}
-      <blockquote class="quote"><p class="q-text" lang="ja">${withMark(q.t)}</p>${q.x ? `<p class="q-orig" lang="${langOf(q)}">${esc(q.x)}</p>` : ''}</blockquote>
+      <blockquote class="quote"><p class="q-text" lang="ja">${withMark(q.t)}</p>${en ? `<p class="q-orig" lang="en">${esc(en)}</p>` : ''}</blockquote>
       <p class="q-author">${esc(q.a)}</p>
       <dl class="meta">
         <div class="row"><dt>出典</dt><dd>${esc(q.w)}</dd></div>
         <div class="row"><dt>生没</dt><dd><span class="yrs">${esc(a.y)}</span>　${esc(a.o)}</dd></div>
         <div class="row"><dt>人物</dt><dd>${esc(a.b)}</dd></div>
+        ${q.x && q.x !== en ? `<div class="row"><dt>原文</dt><dd class="orig" lang="${langOf(q)}">${esc(q.x)}</dd></div>` : ''}
       </dl>
       <div class="actions">
         <button class="act" id="markBtn" aria-pressed="${isMarked(q)}"><svg aria-hidden="true"><use href="#i-bm"/></svg><span>${isMarked(q) ? 'しるしを外す' : 'しるしをつける'}</span></button>
@@ -374,7 +375,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
     card.classList.remove('in'); void card.offsetWidth; card.classList.add('in');
     $('#markBtn').onclick = () => { const k = key(q); marks.has(k) ? marks.delete(k) : marks.add(k); store.set('shiori.marks', [...marks]); renderCard(); if (state.onlyMarks) renderShelf(); };
     $('#copyBtn').onclick = async () => {
-      const text = `「${plain(q.t)}」\n― ${q.a}${q.w}`;
+      const text = `「${plain(q.t)}」\n${en ? en + '\n' : ''}― ${q.a}${q.w}`;
       try {
         if (canShare) { await navigator.share({ text }); return; }
         await navigator.clipboard.writeText(text); toast('書き写しました');
@@ -504,7 +505,6 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
   const STRIPES = [[190,0,140,2,'#fff',.35],[196,80,310,1.5,'#fff',.25],[203,0,390,2,'#000',.08],[212,150,240,1.5,'#fff',.3],[221,0,90,2,'#fff',.22],[229,60,330,1.5,'#000',.1],[238,200,190,2,'#fff',.18],[246,0,390,1.5,'#000',.1]];
   const STARS = [[30,40],[88,22],[140,58],[210,30],[250,74],[330,26],[366,60],[112,110],[190,124],[300,110],[60,150],[350,150]];
   const period = h => (h >= 5 && h < 9) ? 'dawn' : h < 16 ? 'day' : h < 19 ? 'dusk' : 'night';
-  const greeting = h => (h >= 5 && h < 11) ? 'おはよう。' : h < 17 ? 'こんにちは。' : h < 23 ? 'こんばんは。' : 'おやすみ。';
   function sceneSvg(kind, p, night){
     const ys = [0,38,76,114,152,190,220,250,300];
     let out = ys.slice(0,-1).map((y,i) => `<rect x="0" y="${y}" width="390" height="${ys[i+1]-y+.5}" fill="${p[i]}"/>`).join('');
@@ -517,8 +517,8 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
     const now = new Date(), dbg = new URLSearchParams(location.search).get('hour');
     const h = dbg ? Number(dbg) : now.getHours(), per = period(h), p = PAL[per];
     sceneSvgEl.innerHTML = sceneSvg(SCENE_OF[q.m] || 'gull', p, per === 'night');
-    $('#greet').textContent = greeting(h);
-    $('#gmeta').textContent = `${h}:${String(now.getMinutes()).padStart(2,'0')} • ${now.getMonth()+1}月${now.getDate()}日 • ${'日月火水木金土'[now.getDay()]}曜日`;
+    $('#hdate').textContent = `${now.getMonth()+1}月${now.getDate()}日 ${'日月火水木金土'[now.getDay()]}曜日`;
+    $('#hsub').textContent = `${['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][now.getDay()]} • ${['January','February','March','April','May','June','July','August','September','October','November','December'][now.getMonth()]} ${now.getDate()} • ${h}:${String(now.getMinutes()).padStart(2,'0')}`;
     $('.top').classList.toggle('night', per === 'night');
     sceneEl.style.color = p[8]; sceneEl.style.background = p[0];
   }
