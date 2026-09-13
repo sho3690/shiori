@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="栞">
 <meta name="description" content="偉人や名著の書き手の一言を、毎日ひとつ。">
 <title>栞 SHIORI</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Shippori+Mincho:wght@400;500;600;700&family=Josefin+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Shippori+Mincho:wght@400;500;600;700&family=Josefin+Sans:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <style>
 :root{
   --paper:#F4EFE4; --paper-deep:#EBE4D3; --desk:#E6DECB;
@@ -154,6 +154,51 @@ button:disabled{cursor:default}
   .card.in{animation:fade .35s ease both}
   @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 }
+
+/* ══ 装い「海辺」: 淡い帯の風景・幾何学の動物・大きなあいさつ ══ */
+html[data-look="sea"]{
+  --paper:#F6F7F9; --paper-deep:#E9ECF1; --desk:#D9DDE5;
+  --ink:#2B3142; --ink-2:#5F6779; --ink-3:#98A0B0;
+  --rule:#DADDE4; --rule-strong:#C4C9D4;
+  --blue:#3F4E70; --mustard:#E6D3B4; --mustard-soft:#EFE4D2;
+  --serif-jp:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --serif-lat:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+}
+html[data-look="sea"] body::before{opacity:.18}
+html[data-look="sea"] .arch,html[data-look="sea"] .hair{display:none}
+.scene{position:relative;margin:0 -22px;height:clamp(300px,80vw,390px);overflow:hidden;background:#C3D0DF;color:#2B3142}
+.scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene-text{position:absolute;left:22px;top:20px;right:70px}
+.wordmark{font-size:.66rem;letter-spacing:.32em;opacity:.8;font-weight:500}
+.greet{margin:18px 0 6px;font-size:2.7rem;font-weight:700;letter-spacing:.02em;line-height:1.1}
+.gmeta{margin:0;font-size:.8rem;letter-spacing:.12em;font-variant-numeric:tabular-nums;opacity:.85;font-weight:500}
+.top.night .gear{color:#ECEDF3}
+html[data-look="sea"] .gear{top:12px}
+html[data-look="sea"] .top{padding-top:0}
+html[data-look="sea"] .card{padding-top:24px}
+html[data-look="sea"] .date .lbl{font-size:.78rem;font-weight:500;letter-spacing:.22em}
+html[data-look="sea"] .q-text{font-size:clamp(1.3rem,4.9vw,1.6rem);line-height:1.9;font-weight:500;letter-spacing:.01em}
+html[data-look="sea"] .q-text::before,html[data-look="sea"] .q-text::after{content:none}
+html[data-look="sea"] .q-text mark{background:linear-gradient(transparent 62%,var(--mustard) 62%,var(--mustard) 96%,transparent 96%);padding:0 .02em;margin:0}
+html[data-look="sea"] .q-orig{font-style:normal;font-weight:400;font-size:.95rem;line-height:1.7}
+html[data-look="sea"] .q-author{font-weight:700;letter-spacing:.12em}
+html[data-look="sea"] .meta dd .yrs{font-size:1em}
+html[data-look="sea"] .nav{font-size:.9rem;font-weight:500}
+html[data-look="sea"] .chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+html[data-look="sea"] .chip.mark[aria-pressed="true"]{background:var(--mustard);border-color:var(--mustard);color:var(--ink)}
+html[data-look="sea"] .era h2{font-weight:500}
+html[data-look="sea"] .tabs{gap:0;background:var(--paper);border-top:1px solid var(--rule);padding-top:6px}
+html[data-look="sea"] .tab{border:0;border-radius:0;min-height:68px;gap:6px;padding-top:4px}
+html[data-look="sea"] .tab svg{width:34px;height:34px;padding:7px;border-radius:9px;background:var(--paper-deep);color:var(--ink-2)}
+html[data-look="sea"] .tab .lb{font-size:.72rem;letter-spacing:.2em;font-weight:500}
+html[data-look="sea"] .tab[aria-current="page"] svg{background:var(--blue);color:#fff}
+html[data-look="sea"] .tab[aria-current="page"]::after{content:none}
+html[data-look="sea"] .empty .motif{color:var(--blue)}
+html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
+.pop h2+.seg+h2{margin-top:18px}
+.seg.look{grid-template-columns:1fr 1fr}
+@media (min-width:600px){ html[data-look="sea"] .tabs{border-radius:0 0 30px 30px} }
 </style>
 </head>
 <body>
@@ -238,9 +283,15 @@ button:disabled{cursor:default}
       <header class="top">
         <button class="gear" id="gearBtn" aria-label="設定を開く" aria-expanded="false" aria-controls="pop"><svg width="22" height="22"><use href="#i-gear"/></svg></button>
         <div class="pop" id="pop" hidden role="dialog" aria-label="設定">
+          <h2>装い</h2>
+          <div class="seg look" role="group" aria-label="装い"><button data-look="sea" aria-pressed="true">海辺</button><button data-look="old" aria-pressed="false">古書</button></div>
           <h2>文字の大きさ</h2>
           <div class="seg" role="group" aria-label="文字の大きさ"><button data-size="s" aria-pressed="false">小</button><button data-size="m" aria-pressed="true">標準</button><button data-size="l" aria-pressed="false">大</button></div>
           <p class="hint"><b>毎朝ひらくには。</b>iPhoneのSafariで共有ボタンを押し「ホーム画面に追加」を選ぶと、アプリのように開けます。</p>
+        </div>
+        <div class="scene" id="scene" hidden>
+          <svg id="sceneSvg" viewBox="0 0 390 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+          <div class="scene-text"><span class="wordmark">栞 SHIORI</span><p class="greet" id="greet"></p><p class="gmeta" id="gmeta"></p></div>
         </div>
         <div class="arch">
           <div class="motif" id="motif" aria-hidden="true"></div>
@@ -313,11 +364,12 @@ button:disabled{cursor:default}
   function renderCard(){
     const q = currentQuote(), a = A[q.a], detail = !!state.detail;
     motifEl.innerHTML = `<svg viewBox="0 0 200 150"><use href="#m-${q.m}"/></svg>`;
+    if (look() === 'sea') renderScene(q);
     const d = new Date(); d.setDate(d.getDate() + state.offset);
     const label = state.offset === 0 ? '今日の一言' : state.offset === -1 ? '昨日の一言' : `${-state.offset}日前の一言`;
     const head = detail
       ? `<button class="back" id="backBtn"><svg width="28" height="10" aria-hidden="true"><use href="#i-arrow-l"/></svg>書架に戻る</button>`
-      : `<p class="date"><span class="lbl">${label}</span><span class="num">${fmtDate(d)}</span></p>`;
+      : `<p class="date"><span class="lbl">${label}</span>${(look() === 'sea' && state.offset === 0) ? '' : `<span class="num">${fmtDate(d)}</span>`}</p>`;
     const nav = detail ? '' : `<nav class="daynav" aria-label="日付の移動">
         <button class="nav" id="prevBtn"><svg aria-hidden="true"><use href="#i-arrow-l"/></svg><span class="jp">前の日</span></button>
         <button class="nav today" id="todayBtn" ${state.offset === 0 ? 'hidden' : ''}>今日へ戻る</button>
@@ -430,8 +482,71 @@ button:disabled{cursor:default}
 
   // ── 日付が変わったら差し替える ──
   let shown = todayNum();
-  setInterval(() => { const n = todayNum(); if (n !== shown) { shown = n; if (state.tab === 'today' && !state.detail && state.offset === 0) renderCard(); } }, 30000);
+  setInterval(() => { const n = todayNum(); if (n !== shown) { shown = n; if (state.tab === 'today' && !state.detail && state.offset === 0) renderCard(); } else if (look() === 'sea' && state.tab === 'today') renderScene(currentQuote()); }, 30000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) { const n = todayNum(); if (n !== shown) { shown = n; state.offset = 0; if (state.tab === 'today' && !state.detail) renderCard(); } } });
+
+  // ── 装い「海辺」: 時間帯の空・風景・あいさつ ──
+  const PAL = {
+    dawn:  ['#D5D8E5','#DDD6DF','#E7D0C8','#EFCAB2','#F1C4A4','#93A3BF','#6F81A3','#CDB9A1','#2B3142'],
+    day:   ['#C3D0DF','#CBD6E2','#D4DCE6','#DDE2EA','#E5E8EE','#8296B5','#5F7093','#C9B7A0','#2B3142'],
+    dusk:  ['#BFC3D8','#CDC3D3','#DFC5BE','#ECC3A9','#F0BE9C','#6C7A9C','#46536F','#B29A7D','#2B3142'],
+    night: ['#262C45','#2B324E','#313958','#384062','#3F476A','#2A3450','#1F2740','#3A3A48','#ECEDF3']
+  };
+  const SCENE_OF = { book:'boat', quill:'gull', lamp:'lighthouse', candle:'lighthouse', hourglass:'whale', laurel:'deer', moon:'moon' };
+  const FIG = {
+    gull: `<path d="M262,250 L262,264 M276,250 L276,264 M255,264 L269,264 M269,264 L283,264" stroke="#E4A59C" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+      <path d="M238,236 C238,222 252,212 272,212 C288,212 300,220 302,232 L300,240 C292,250 270,254 250,250 Z" fill="#F2F2F2"/>
+      <path d="M252,226 C262,216 288,216 300,226 L294,242 C278,246 262,244 254,240 Z" fill="#C5C7CC"/>
+      <path d="M298,232 L326,236 L302,246 Z" fill="#2B2B2E"/>
+      <path d="M236,216 L254,212 L252,228 L238,230 Z" fill="#F2F2F2"/><circle cx="244" cy="208" r="11" fill="#F2F2F2"/>
+      <path d="M234,207 L220,210 L234,213 Z" fill="#E8B84A"/><circle cx="241" cy="205" r="1.6" fill="#2B2B2E"/>`,
+    boat: `<path d="M150,214 L256,214 L246,230 L160,230 Z" fill="#6E5237"/><path d="M148,212 L258,212 L256,217 L150,217 Z" fill="#8C6B4A"/>
+      <rect x="198" y="194" width="10" height="20" rx="2" fill="#2E3448"/><circle cx="203" cy="189" r="5.5" fill="#2E3448"/><path d="M186,206 L172,222" stroke="#8C6B4A" stroke-width="2"/>
+      <rect x="156" y="234" width="94" height="2" fill="rgba(255,255,255,.35)"/><rect x="166" y="239" width="74" height="1.5" fill="rgba(255,255,255,.22)"/><rect x="176" y="244" width="54" height="1.5" fill="rgba(255,255,255,.14)"/>`,
+    deer: `<rect x="56" y="0" width="14" height="250" fill="#2A2530"/><rect x="298" y="0" width="12" height="250" fill="#2A2530"/><rect x="298" y="44" width="92" height="7" fill="#2A2530"/><rect x="0" y="92" width="70" height="6" fill="#2A2530"/>
+      <rect x="178" y="226" width="6" height="26" fill="#46331F"/><rect x="196" y="226" width="6" height="26" fill="#46331F"/><rect x="226" y="226" width="6" height="26" fill="#46331F"/><rect x="242" y="226" width="6" height="26" fill="#46331F"/>
+      <path d="M168,198 L250,192 L256,214 L242,230 L176,230 L162,214 Z" fill="#6C4F37"/><path d="M176,198 L184,170 L200,166 L206,178 L198,200 Z" fill="#8A6A4C"/>
+      <path d="M170,158 L202,162 L204,172 L186,172 L164,168 Z" fill="#8A6A4C"/><path d="M198,158 L208,146 L204,164 Z" fill="#6C4F37"/>
+      <path d="M192,158 L188,140 M189,148 L180,144 M189,143 L196,132" stroke="#46331F" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <circle cx="172" cy="163" r="1.6" fill="#2A2530"/><path d="M250,196 L258,200 L252,206 Z" fill="#F0EDE6"/>`,
+    lighthouse: `<path d="M294,250 L318,230 L346,236 L370,224 L390,234 L390,250 Z" fill="#55617A"/>
+      <path d="M341,139 L200,112 L200,166 Z" fill="rgba(245,217,139,.22)"/>
+      <path d="M330,232 L336,150 L356,150 L362,232 Z" fill="#F0EFEA"/><path d="M334,180 L358,180 L359,198 L333,198 Z" fill="#B85C5C"/>
+      <rect x="328" y="148" width="36" height="5" fill="#2E3448"/><rect x="337" y="130" width="18" height="18" fill="#2E3448"/><rect x="341" y="134" width="10" height="10" fill="#F5D98B"/><path d="M333,130 L346,118 L359,130 Z" fill="#2E3448"/>`,
+    whale: `<path d="M116,232 C146,196 232,196 264,232 Z" fill="#2E3B57"/><path d="M198,208 L208,196 L216,210 Z" fill="#2E3B57"/><path d="M286,236 L300,212 L314,236 Z" fill="#2E3B57"/>
+      <circle cx="132" cy="192" r="2" fill="rgba(255,255,255,.8)"/><circle cx="128" cy="182" r="2.6" fill="rgba(255,255,255,.75)"/><circle cx="137" cy="178" r="2" fill="rgba(255,255,255,.7)"/><circle cx="131" cy="170" r="3" fill="rgba(255,255,255,.65)"/><circle cx="124" cy="172" r="1.8" fill="rgba(255,255,255,.6)"/>`,
+    moon: `<circle cx="300" cy="66" r="24" fill="rgba(255,255,255,.85)"/><path d="M0,192 L60,140 L120,178 L172,128 L240,182 L300,150 L390,192 Z" fill="rgba(255,255,255,.28)"/><path d="M0,250 L80,190 L150,236 L220,182 L290,232 L340,204 L390,240 L390,252 L0,252 Z" fill="rgba(46,59,87,.55)"/>`
+  };
+  const STRIPES = [[190,0,140,2,'#fff',.35],[196,80,310,1.5,'#fff',.25],[203,0,390,2,'#000',.08],[212,150,240,1.5,'#fff',.3],[221,0,90,2,'#fff',.22],[229,60,330,1.5,'#000',.1],[238,200,190,2,'#fff',.18],[246,0,390,1.5,'#000',.1]];
+  const STARS = [[30,40],[88,22],[140,58],[210,30],[250,74],[330,26],[366,60],[112,110],[190,124],[300,110],[60,150],[350,150]];
+  const period = h => (h >= 5 && h < 9) ? 'dawn' : h < 16 ? 'day' : h < 19 ? 'dusk' : 'night';
+  const greeting = h => (h >= 5 && h < 11) ? 'おはよう。' : h < 17 ? 'こんにちは。' : h < 23 ? 'こんばんは。' : 'おやすみ。';
+  function sceneSvg(kind, p, night){
+    const ys = [0,38,76,114,152,190,220,250,300];
+    let out = ys.slice(0,-1).map((y,i) => `<rect x="0" y="${y}" width="390" height="${ys[i+1]-y+.5}" fill="${p[i]}"/>`).join('');
+    out += STRIPES.map(([y,x,w,h,c,o]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" opacity="${o}"/>`).join('');
+    if (night) out += STARS.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="1.4" fill="#fff" opacity=".8"/>`).join('');
+    return out + (FIG[kind] || FIG.gull);
+  }
+  const sceneEl = $('#scene'), sceneSvgEl = $('#sceneSvg');
+  function renderScene(q){
+    const now = new Date(), dbg = new URLSearchParams(location.search).get('hour');
+    const h = dbg ? Number(dbg) : now.getHours(), per = period(h), p = PAL[per];
+    sceneSvgEl.innerHTML = sceneSvg(SCENE_OF[q.m] || 'gull', p, per === 'night');
+    $('#greet').textContent = greeting(h);
+    $('#gmeta').textContent = `${h}:${String(now.getMinutes()).padStart(2,'0')} • ${now.getMonth()+1}月${now.getDate()}日 • ${'日月火水木金土'[now.getDay()]}曜日`;
+    $('.top').classList.toggle('night', per === 'night');
+    sceneEl.style.color = p[8]; sceneEl.style.background = p[0];
+  }
+  const look = () => document.documentElement.dataset.look || 'sea';
+  function applyLook(l){
+    if (l !== 'old') l = 'sea';
+    document.documentElement.dataset.look = l;
+    sceneEl.hidden = l !== 'sea'; $('.arch').hidden = l === 'sea'; $('.hair').hidden = l === 'sea';
+    document.querySelectorAll('.seg.look button').forEach(b => b.setAttribute('aria-pressed', b.dataset.look === l));
+  }
+  applyLook(store.get('shiori.look', 'sea'));
+  document.querySelectorAll('.seg.look button').forEach(b => b.onclick = () => { applyLook(b.dataset.look); store.set('shiori.look', b.dataset.look); if (state.tab === 'today') renderCard(); });
 
   setTab('today');
 })();
