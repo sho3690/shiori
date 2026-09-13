@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect width="1024" height="1024" fill="#F4EFE4"/>
+  <rect x="64" y="64" width="896" height="896" fill="none" stroke="#BFB59E" stroke-width="4"/>
+  <path d="M736 0 H872 V540 L804 482 L736 540 Z" fill="#DDB53E" stroke="#3B5FA6" stroke-width="10" stroke-linejoin="round"/>
+  <text x="448" y="662" text-anchor="middle" font-family="'Hiragino Mincho ProN','Yu Mincho','Shippori Mincho',serif" font-weight="600" font-size="500" fill="#26221C">栞</text>
+</svg>

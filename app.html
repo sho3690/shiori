@@ -1,0 +1,422 @@
+<title>栞 SHIORI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Shippori+Mincho:wght@400;500;600;700&family=Josefin+Sans:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#F4EFE4; --paper-deep:#EBE4D3; --desk:#E6DECB;
+  --ink:#26221C; --ink-2:#5E574C; --ink-3:#8A8172;
+  --rule:#D9D0BD; --rule-strong:#BFB59E;
+  --blue:#3B5FA6; --mustard:#DDB53E; --mustard-soft:#EBD27E;
+  --serif-jp:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --serif-lat:"Cormorant Garamond","Shippori Mincho",Georgia,serif;
+  --sans:"Josefin Sans","Hiragino Sans","Helvetica Neue",Arial,sans-serif;
+  --col:520px;
+  color-scheme:light;
+}
+html{font-size:16px}
+html[data-size="s"]{font-size:15px}
+html[data-size="l"]{font-size:18px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif-jp);line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .27 0 0 0 0 .18 0 0 0 .10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.app{position:relative;z-index:1;max-width:var(--col);margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;background:var(--paper);padding-inline:22px}
+main{flex:1;padding-bottom:28px}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:disabled{cursor:default}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+
+/* ── 上部: 歯車・アーチ・銘 ── */
+.top{position:relative;padding-top:18px}
+.gear{position:absolute;right:-6px;top:14px;width:44px;height:44px;display:grid;place-items:center;color:var(--ink-2);border-radius:50%}
+.gear:hover{color:var(--ink)}
+.arch{width:min(78%,360px);margin:0 auto;aspect-ratio:1/1.02;border:1px solid var(--rule-strong);border-bottom:0;border-radius:999px 999px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 24px 18px;position:relative}
+.motif{width:74%;color:var(--blue);display:block;margin-bottom:auto;margin-top:16%}
+.motif svg{width:100%;height:auto;display:block}
+.brand{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink)}
+.brand .kanji{font-size:1.5rem;font-weight:600;letter-spacing:.25em;margin-right:-.25em;line-height:1}
+.brand .roman{font-family:var(--sans);font-size:.62rem;letter-spacing:.42em;margin-right:-.42em;color:var(--ink-2);text-transform:uppercase}
+.hair{height:1px;background:var(--rule-strong);margin:0 -22px}
+
+/* ── 一言 ── */
+.card{padding-top:26px}
+.date{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;color:var(--ink-2);margin:0 0 20px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.date .lbl{font-family:var(--serif-jp);letter-spacing:.2em;font-size:.8rem;color:var(--ink)}
+.date .num{font-variant-numeric:tabular-nums}
+.back{font-family:var(--serif-jp);font-size:.85rem;letter-spacing:.1em;color:var(--ink-2);display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:-10px}
+.back:hover{color:var(--ink)}
+.quote{margin:0}
+.q-text{margin:0;font-size:clamp(1.45rem,5.6vw,1.95rem);line-height:1.75;font-weight:500;letter-spacing:.02em;text-wrap:pretty;position:relative}
+.q-text::before{content:"\201C";font-family:var(--serif-lat);font-weight:500;font-size:1.35em;line-height:0;position:relative;top:-.02em;margin-right:.06em}
+.q-text::after{content:"\201D";font-family:var(--serif-lat);font-weight:500;font-size:1.35em;line-height:0;position:relative;top:-.02em;margin-left:.06em}
+.q-text mark{background:linear-gradient(transparent 18%,var(--mustard) 18%,var(--mustard) 92%,transparent 92%);color:inherit;padding:0 .08em;margin:0 -.04em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.q-orig{margin:18px 0 0;font-family:var(--serif-lat);font-style:italic;font-weight:500;font-size:1.08rem;line-height:1.5;color:var(--ink-2);text-wrap:pretty}
+.q-author{margin:26px 0 0;font-size:1.05rem;font-weight:600;letter-spacing:.1em;display:flex;align-items:center;gap:10px}
+.q-author::before{content:"";width:22px;height:1px;background:var(--ink)}
+.meta{margin:30px 0 0;border-top:1px solid var(--rule);display:grid}
+.meta .row{display:grid;grid-template-columns:4.2em 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.meta dt{margin:0;font-size:.8rem;letter-spacing:.2em;color:var(--ink-2)}
+.meta dd{margin:0;font-size:.95rem;line-height:1.6}
+.meta dd .yrs{font-family:var(--serif-lat);font-size:1.02em;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.actions{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.act{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 10px 0 4px;font-size:.88rem;letter-spacing:.08em;color:var(--ink-2);border-radius:4px}
+.act svg{width:18px;height:18px;flex:none}
+.act:hover{color:var(--ink)}
+.act[aria-pressed="true"]{color:var(--ink)}
+.act[aria-pressed="true"] .bm-fill{fill:var(--mustard)}
+.daynav{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:8px}
+.nav{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-family:var(--serif-lat);font-size:1.3rem;font-weight:500;color:var(--ink);padding:0 2px;border-radius:4px}
+.nav .jp{font-family:var(--serif-jp);font-size:.9rem;letter-spacing:.14em;font-weight:500}
+.nav:disabled{color:var(--ink-3)}
+.nav svg{width:44px;height:12px;overflow:visible}
+.nav.today{font-family:var(--serif-jp);font-size:.82rem;letter-spacing:.14em;color:var(--ink-2);text-decoration:underline;text-underline-offset:.3em;text-decoration-color:var(--rule-strong)}
+.nav.today:hover{color:var(--ink)}
+
+/* ── 書架 ── */
+.shelf-top{padding-top:22px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--rule-strong);margin:0 -22px;padding-inline:22px}
+.shelf-top h1{margin:0;font-size:1.7rem;font-weight:600;letter-spacing:.2em;line-height:1.1}
+.shelf-top .sub{margin:0;font-size:.8rem;color:var(--ink-2);letter-spacing:.06em;text-align:right;line-height:1.5}
+.shelf-top .sub b{font-family:var(--serif-lat);font-weight:600;font-size:1.1em;font-variant-numeric:tabular-nums}
+.search{margin-top:18px;position:relative}
+.search input{width:100%;min-height:46px;border:1px solid var(--rule-strong);background:#fff9;border-radius:6px;padding:0 14px 0 40px;font:inherit;font-size:.95rem;color:var(--ink);letter-spacing:.04em}
+.search input::placeholder{color:var(--ink-3)}
+.search input:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--ink-2)}
+.chips{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.chip{min-height:36px;padding:0 12px;border:1px solid var(--rule-strong);border-radius:999px;font-size:.8rem;letter-spacing:.1em;color:var(--ink-2);background:transparent}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.mark[aria-pressed="true"]{background:var(--mustard);color:var(--ink);border-color:var(--mustard)}
+.era{margin-top:30px}
+.era h2{margin:0 0 4px;font-family:var(--sans);font-size:.68rem;letter-spacing:.32em;color:var(--ink-2);text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.era h2 .jp{font-family:var(--serif-jp);font-size:.9rem;letter-spacing:.2em;color:var(--ink);text-transform:none}
+.era h2::after{content:"";flex:1;height:1px;background:var(--rule)}
+.authors{list-style:none;margin:0;padding:0}
+.author{border-bottom:1px solid var(--rule)}
+.a-row{width:100%;display:grid;grid-template-columns:1fr auto auto;align-items:baseline;gap:14px;min-height:56px;padding:10px 0;text-align:left}
+.a-row .nm{font-size:1.02rem;font-weight:600;letter-spacing:.06em}
+.a-row .yr{font-family:var(--serif-lat);font-size:.95rem;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.a-row .ct{font-family:var(--serif-lat);font-size:.95rem;color:var(--ink-2);min-width:1.6em;text-align:right;font-variant-numeric:tabular-nums}
+.a-row .ct::after{content:"";display:inline-block;width:6px;height:6px;border-right:1px solid var(--ink-3);border-bottom:1px solid var(--ink-3);transform:rotate(45deg);margin-left:10px;position:relative;top:-3px;transition:transform .2s}
+.author.open .a-row .ct::after{transform:rotate(-135deg);top:0}
+.a-bio{margin:-6px 0 12px;font-size:.82rem;color:var(--ink-2);letter-spacing:.02em}
+.qlist{list-style:none;margin:0 0 6px;padding:0 0 0 14px;border-left:1px solid var(--rule-strong)}
+.qlist li+li{margin-top:2px}
+.q-row{width:100%;text-align:left;display:grid;gap:3px;padding:10px 8px 10px 10px;min-height:48px;border-radius:4px}
+.q-row:hover{background:var(--paper-deep)}
+.q-row .tx{font-size:.95rem;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.q-row .tx mark{background:linear-gradient(transparent 18%,var(--mustard-soft) 18%,var(--mustard-soft) 92%,transparent 92%);color:inherit}
+.q-row .wk{font-size:.78rem;color:var(--ink-2);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.q-row .wk svg{width:12px;height:12px;color:var(--mustard)}
+.empty{text-align:center;padding:48px 12px 24px;color:var(--ink-2)}
+.empty .motif{width:38%;margin:0 auto 18px;color:var(--blue)}
+.empty p{margin:0;font-size:.95rem;line-height:1.9;letter-spacing:.04em}
+
+/* ── タブ ── */
+.tabs{position:sticky;bottom:0;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 0 env(safe-area-inset-bottom);background:linear-gradient(transparent,var(--paper) 30%);margin:0 -22px;padding-inline:22px;padding-top:16px}
+.tab{border:1px solid var(--rule-strong);border-bottom:0;border-radius:999px 999px 0 0;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:74px;color:var(--ink-2);position:relative;padding-top:6px}
+.tab svg{width:24px;height:24px}
+.tab .lb{font-size:.78rem;letter-spacing:.24em;margin-right:-.24em;font-weight:500}
+.tab[aria-current="page"]{color:var(--ink)}
+.tab[aria-current="page"]::after{content:"";position:absolute;left:22%;right:22%;bottom:0;height:3px;background:var(--mustard)}
+
+/* ── 設定 ── */
+.pop{position:absolute;right:0;top:64px;z-index:10;background:var(--paper);border:1px solid var(--rule-strong);border-radius:12px;padding:16px 18px 14px;width:min(300px,calc(100vw - 44px));box-shadow:0 12px 32px -14px rgba(40,30,10,.45)}
+.pop h2{margin:0 0 12px;font-size:.8rem;letter-spacing:.2em;color:var(--ink-2);font-weight:500}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule-strong);border-radius:8px;overflow:hidden}
+.seg button{min-height:42px;font-size:.9rem;letter-spacing:.1em;color:var(--ink-2)}
+.seg button+button{border-left:1px solid var(--rule-strong)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.pop .hint{margin:14px 0 0;font-size:.78rem;line-height:1.7;color:var(--ink-2);letter-spacing:.02em}
+.pop .hint b{font-weight:600;color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(112px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:20;background:var(--ink);color:var(--paper);font-size:.85rem;letter-spacing:.14em;padding:10px 20px;border-radius:999px;box-shadow:0 8px 24px -10px rgba(0,0,0,.5)}
+
+@media (min-width:600px){
+  body{background:var(--desk)}
+  .app{margin-block:32px;min-height:calc(100dvh - 64px);border-radius:30px;box-shadow:0 0 0 1px var(--rule-strong),0 30px 70px -36px rgba(40,30,10,.5);overflow:clip}
+  .tabs{border-radius:0 0 30px 30px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .card.in{animation:fade .35s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+<pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)"><line x1="0" y1="0" x2="0" y2="4" stroke="#3B5FA6" stroke-width=".7"/></pattern>
+<pattern id="hatch2" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><line x1="0" y1="0" x2="0" y2="3" stroke="#3B5FA6" stroke-width=".55"/></pattern>
+<path id="leaf" d="M0,0 C7,-11 19,-13 28,-5 C19,3 7,5 0,0 Z"/>
+</defs>
+<symbol id="m-book" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M22,42 C48,32 82,34 100,48 C118,34 152,32 178,42 L178,118 C152,110 118,112 100,126 C82,112 48,110 22,118 Z" fill="url(#hatch)" stroke="none" opacity=".45"/>
+<path d="M22,42 C48,32 82,34 100,48 L100,126 C82,112 48,110 22,118 Z"/><path d="M178,42 C152,32 118,34 100,48 L100,126 C118,112 152,110 178,118 Z"/>
+<path d="M30,50 C52,42 80,44 96,56 M170,50 C148,42 120,44 104,56" stroke-width="1"/>
+<path d="M18,122 C46,114 82,116 100,130 C118,116 154,114 182,122 M18,122 L22,118 M182,122 L178,118" stroke-width="1.2"/>
+<path d="M34,66 C52,60 74,61 90,70 M34,78 C52,72 74,73 90,82 M34,90 C52,84 74,85 90,94 M34,102 C50,96 68,97 82,104 M166,66 C148,60 126,61 110,70 M166,78 C148,72 126,73 110,82 M166,90 C148,84 126,85 110,94 M166,102 C150,96 132,97 118,104" stroke-width="1.1"/>
+<path d="M104,58 L104,88 L108,84 L112,88 L112,60" fill="#DDB53E" stroke-width="1"/>
+<path d="M40,137 L160,137" stroke-width="1" opacity=".45"/><path d="M62,142 L138,142" stroke-width=".8" opacity=".3"/></g></symbol>
+<symbol id="m-quill" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M34,94 L86,94 L86,102 L80,102 L80,130 L40,130 L40,102 L34,102 Z" fill="url(#hatch)"/>
+<path d="M50,94 L50,86 L70,86 L70,94"/><ellipse cx="60" cy="86" rx="11" ry="3.2"/>
+<path d="M46,112 L74,112 M46,120 L74,120" stroke-width=".9" opacity=".55"/>
+<path d="M62,96 C90,74 126,44 172,14"/>
+<path d="M108,60 C118,34 144,14 172,14 C170,40 152,66 124,78 C116,80 110,72 108,60 Z" fill="url(#hatch2)"/>
+<path d="M160,24 C152,34 146,44 138,54 M150,32 C146,44 140,54 132,64 M140,44 C136,54 130,62 124,70 M130,56 C124,64 120,70 116,76 M164,18 C158,26 152,32 146,40" stroke-width=".9" opacity=".7"/>
+<path d="M96,132 C122,128 150,130 178,126" stroke-width="1" opacity=".5"/><path d="M104,140 C128,136 150,138 172,135" stroke-width=".8" opacity=".35"/></g></symbol>
+<symbol id="m-lamp" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M164,60 C158,68 160,76 166,78 C172,76 174,68 168,58 C167,62 165,64 164,60 Z" fill="#DDB53E"/>
+<path d="M52,92 C52,78 84,72 108,72 C132,72 150,76 152,86 L170,80 L166,92 L152,96 C146,108 124,114 104,114 C80,114 54,108 52,92 Z" fill="url(#hatch)"/>
+<path d="M52,92 C52,78 84,72 108,72 C132,72 150,76 152,86 L170,80 L166,92 L152,96 C146,108 124,114 104,114 C80,114 54,108 52,92 Z"/>
+<ellipse cx="104" cy="74" rx="14" ry="4"/><path d="M104,70 L104,64 M99,64 L109,64"/>
+<path d="M54,88 C32,84 28,106 50,106"/><path d="M52,92 C40,90 38,100 50,102" stroke-width="1"/>
+<path d="M84,114 L80,124 L128,124 L124,114"/><ellipse cx="104" cy="124" rx="30" ry="5"/>
+<path d="M60,140 L148,140" stroke-width="1" opacity=".45"/>
+<path d="M180,50 L186,44 M182,68 L190,68 M156,44 L154,38" stroke-width="1" opacity=".6"/></g></symbol>
+<symbol id="m-hourglass" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<rect x="58" y="14" width="84" height="8" rx="2"/><rect x="58" y="128" width="84" height="8" rx="2"/>
+<path d="M70,22 C70,52 94,64 100,75 C106,64 130,52 130,22"/><path d="M70,128 C70,98 94,86 100,75 C106,86 130,98 130,128"/>
+<path d="M80,44 C86,56 96,62 100,70 C104,62 114,56 120,44 Z" fill="url(#hatch2)" stroke="none"/><path d="M80,44 L120,44" stroke-width="1"/>
+<path d="M100,74 L100,112" stroke-width="1" stroke-dasharray="1 3"/>
+<path d="M76,128 C84,116 94,108 100,104 C106,108 116,116 124,128 Z" fill="url(#hatch)"/>
+<path d="M62,22 L62,128 M138,22 L138,128" stroke-width="1.2"/>
+<path d="M50,142 L150,142" stroke-width="1" opacity=".45"/></g></symbol>
+<symbol id="m-laurel" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<g id="lbranch"><path d="M100,132 C70,120 50,90 56,50"/>
+<use href="#leaf" transform="translate(83,123) rotate(-170)"/><use href="#leaf" transform="translate(83,123) rotate(-105)"/>
+<use href="#leaf" transform="translate(70,109) rotate(-160)"/><use href="#leaf" transform="translate(70,109) rotate(-95)"/>
+<use href="#leaf" transform="translate(60,93) rotate(-150)"/><use href="#leaf" transform="translate(60,93) rotate(-78)"/>
+<use href="#leaf" transform="translate(55,73) rotate(-135)"/><use href="#leaf" transform="translate(55,73) rotate(-60)"/>
+<use href="#leaf" transform="translate(56,50) rotate(-85)"/></g>
+<use href="#lbranch" transform="matrix(-1,0,0,1,200,0)"/>
+<path d="M92,134 C96,142 104,142 108,134 M96,138 L92,146 M104,138 L108,146" stroke-width="1.2"/></g></symbol>
+<symbol id="m-candle" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M36,120 L164,120 L164,134 L36,134 Z" fill="url(#hatch)"/><path d="M44,106 L156,106 L156,120 L44,120 Z"/><path d="M40,92 L152,92 L152,106 L40,106 Z" fill="url(#hatch2)"/>
+<path d="M48,127 L152,127 M56,113 L144,113 M52,99 L140,99" stroke-width=".9" opacity=".55"/>
+<path d="M164,120 L168,124 L168,138 L40,138 L36,134" stroke-width="1"/>
+<path d="M90,92 L90,52 C90,48 94,46 100,46 C106,46 110,48 110,52 L110,92"/>
+<path d="M92,60 C92,68 90,72 94,74 M108,56 C108,62 110,68 106,70 C104,72 106,78 108,80" stroke-width="1"/>
+<path d="M100,46 L100,38"/>
+<path d="M100,16 C92,26 92,36 100,40 C108,36 108,26 100,16 Z" fill="#DDB53E"/><path d="M100,27 C97,31 97,35 100,37 C103,35 103,31 100,27 Z" fill="#F4EFE4" stroke="none"/>
+<path d="M80,24 L76,20 M120,24 L124,20 M100,8 L100,4" stroke-width="1" opacity=".5"/>
+<ellipse cx="100" cy="92" rx="10" ry="3"/><path d="M54,144 L150,144" stroke-width="1" opacity=".4"/></g></symbol>
+<symbol id="m-moon" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M118,22 A46,46 0 1 0 118,114 A36,36 0 1 1 118,22 Z" fill="url(#hatch)"/>
+<path d="M150,40 L150,52 M144,46 L156,46 M164,80 L164,88 M160,84 L168,84 M40,36 L40,42 M37,39 L43,39" stroke-width="1.2"/>
+<path d="M20,132 C50,120 90,120 130,130 C150,134 166,136 182,134"/>
+<use href="#leaf" transform="translate(50,124) rotate(-150)"/><use href="#leaf" transform="translate(74,121) rotate(-120)"/><use href="#leaf" transform="translate(100,123) rotate(-140)"/><use href="#leaf" transform="translate(124,128) rotate(-110)"/><use href="#leaf" transform="translate(146,132) rotate(-140)"/>
+<path d="M30,146 L170,146" stroke-width="1" opacity=".35"/></g></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/><circle cx="12" cy="12" r="7"/></g></symbol>
+<symbol id="i-bm" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path class="bm-fill" d="M6 3h12v18l-6-4.2L6 21z"/></g></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="8" y="8" width="12" height="13" rx="1.5"/><path d="M16 8V4.5A1.5 1.5 0 0 0 14.5 3h-9A1.5 1.5 0 0 0 4 4.5v10A1.5 1.5 0 0 0 5.5 16H8"/></g></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11v8.5A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V11"/></g></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></g></symbol>
+<symbol id="i-today" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 5.5C6 4.5 9 4.8 12 7c3-2.2 6-2.5 9-1.5v13c-3-1-6-.7-9 1.5-3-2.2-6-2.5-9-1.5z"/><path d="M12 7v13"/></g></symbol>
+<symbol id="i-shelf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 21h18"/><rect x="4" y="5" width="4" height="16"/><rect x="9" y="3" width="4" height="18"/><path d="m14.5 6 3.9-1 3.9 15.5-3.9 1z"/></g></symbol>
+<symbol id="i-arrow-r" viewBox="0 0 44 12"><path d="M0 6h42M36 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-arrow-l" viewBox="0 0 44 12"><path d="M44 6H2M8 1 2 6l6 5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-mark-s" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.2L6 21z" fill="currentColor"/></symbol>
+</svg>
+<div class="app" id="app">
+  <main>
+    <div id="view-today">
+      <header class="top">
+        <button class="gear" id="gearBtn" aria-label="設定を開く" aria-expanded="false" aria-controls="pop"><svg width="22" height="22"><use href="#i-gear"/></svg></button>
+        <div class="pop" id="pop" hidden role="dialog" aria-label="設定">
+          <h2>文字の大きさ</h2>
+          <div class="seg" role="group" aria-label="文字の大きさ"><button data-size="s" aria-pressed="false">小</button><button data-size="m" aria-pressed="true">標準</button><button data-size="l" aria-pressed="false">大</button></div>
+          <p class="hint"><b>毎朝ひらくには。</b>iPhoneのSafariで共有ボタンを押し「ホーム画面に追加」を選ぶと、アプリのように開けます。</p>
+        </div>
+        <div class="arch">
+          <div class="motif" id="motif" aria-hidden="true"></div>
+          <div class="brand"><span class="kanji">栞</span><span class="roman">Shiori</span></div>
+        </div>
+        <div class="hair"></div>
+      </header>
+      <article class="card" id="card" aria-live="polite"></article>
+    </div>
+    <div id="view-shelf" hidden>
+      <div class="shelf-top"><h1>書架</h1><p class="sub"><b id="cntQ">0</b>の一言<br><b id="cntA">0</b>人の書き手</p></div>
+      <div class="search"><label class="sr" for="q">人物名・作品名・言葉で探す</label><svg aria-hidden="true"><use href="#i-search"/></svg><input id="q" type="search" placeholder="人物名・作品名・言葉で探す" autocomplete="off"></div>
+      <div class="chips" role="group" aria-label="絞り込み">
+        <button class="chip" data-r="all" aria-pressed="true">すべて</button><button class="chip" data-r="jp" aria-pressed="false">日本</button><button class="chip" data-r="east" aria-pressed="false">東洋</button><button class="chip" data-r="west" aria-pressed="false">西洋</button><button class="chip mark" id="chipMark" aria-pressed="false">しるし</button>
+      </div>
+      <div id="shelf"></div>
+    </div>
+  </main>
+  <nav class="tabs" aria-label="画面の切り替え">
+    <button class="tab" data-tab="today" aria-current="page"><svg aria-hidden="true"><use href="#i-today"/></svg><span class="lb">今日</span></button>
+    <button class="tab" data-tab="shelf"><svg aria-hidden="true"><use href="#i-shelf"/></svg><span class="lb">書架</span></button>
+  </nav>
+</div>
+<div class="toast" id="toast" hidden role="status"></div>
+<script src="quotes.js"></script>
+<script>
+(function(){
+  const A = window.SHIORI_AUTHORS, Q = window.SHIORI_QUOTES;
+  const $ = (s, el=document) => el.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const withMark = t => esc(t).replace(/\*(.+?)\*/g, '<mark>$1</mark>');
+  const plain = t => t.replace(/\*/g, '');
+  const key = q => q.a + '|' + q.t.slice(0, 14);
+
+  // ── 日付 → その日の一言（N日ごとに並びを変え、同じ句が続かないようにする）──
+  const EPOCH = Date.UTC(2026, 0, 1);
+  const dayNum = d => Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - EPOCH) / 864e5);
+  const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const orders = new Map();
+  function orderFor(block){
+    if (!orders.has(block)) {
+      const r = rng(block * 7919 + 17), o = Q.map((_, i) => i);
+      for (let i = o.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
+      orders.set(block, o);
+    }
+    return orders.get(block);
+  }
+  function quoteForDay(n){ const N = Q.length; const block = Math.floor(n / N); const idx = ((n % N) + N) % N; return Q[orderFor(block)[idx]]; }
+  const fmtDate = d => `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 ${'日月火水木金土'[d.getDay()]}曜日`;
+  const langOf = (q) => {
+    const x = q.x || '', o = A[q.a].o;
+    if (/[Ѐ-ӿ]/.test(x)) return 'ru'; if (/[Ͱ-Ͽ]/.test(x)) return 'el'; if (/[一-鿿]/.test(x)) return 'zh';
+    if (/フランス|ジュネーヴ/.test(o)) return 'fr'; if (/ドイツ|オーストリア|プラハ/.test(o)) return 'de'; if (/イタリア/.test(o)) return 'it';
+    if (/スペイン|アルゼンチン|コロンビア/.test(o)) return 'es'; if (/デンマーク/.test(o)) return 'da'; if (/オランダ/.test(o)) return 'nl'; if (/ローマ/.test(o)) return 'la'; return 'en';
+  };
+
+  // ── 保存（しるし・文字サイズ）──
+  const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+  let marks = new Set(store.get('shiori.marks', []));
+  const isMarked = q => marks.has(key(q));
+  const canShare = !!(navigator.share && /iPhone|iPad|Android/i.test(navigator.userAgent));
+
+  // ── 状態 ──
+  const state = { tab: 'today', offset: 0, detail: null, region: 'all', onlyMarks: false, query: '', open: new Set() };
+  const todayNum = () => dayNum(new Date());
+  const currentQuote = () => state.detail || quoteForDay(todayNum() + state.offset);
+
+  // ── 一言カード ──
+  const motifEl = $('#motif'), card = $('#card');
+  function renderCard(){
+    const q = currentQuote(), a = A[q.a], detail = !!state.detail;
+    motifEl.innerHTML = `<svg viewBox="0 0 200 150"><use href="#m-${q.m}"/></svg>`;
+    const d = new Date(); d.setDate(d.getDate() + state.offset);
+    const label = state.offset === 0 ? '今日の一言' : state.offset === -1 ? '昨日の一言' : `${-state.offset}日前の一言`;
+    const head = detail
+      ? `<button class="back" id="backBtn"><svg width="28" height="10" aria-hidden="true"><use href="#i-arrow-l"/></svg>書架に戻る</button>`
+      : `<p class="date"><span class="lbl">${label}</span><span class="num">${fmtDate(d)}</span></p>`;
+    const nav = detail ? '' : `<nav class="daynav" aria-label="日付の移動">
+        <button class="nav" id="prevBtn"><svg aria-hidden="true"><use href="#i-arrow-l"/></svg><span class="jp">前の日</span></button>
+        <button class="nav today" id="todayBtn" ${state.offset === 0 ? 'hidden' : ''}>今日へ戻る</button>
+        <button class="nav" id="nextBtn" ${state.offset >= 0 ? 'disabled' : ''}><span class="jp">次の日</span><svg aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+      </nav>`;
+    card.innerHTML = `${head}
+      <blockquote class="quote"><p class="q-text" lang="ja">${withMark(q.t)}</p>${q.x ? `<p class="q-orig" lang="${langOf(q)}">${esc(q.x)}</p>` : ''}</blockquote>
+      <p class="q-author">${esc(q.a)}</p>
+      <dl class="meta">
+        <div class="row"><dt>出典</dt><dd>${esc(q.w)}</dd></div>
+        <div class="row"><dt>生没</dt><dd><span class="yrs">${esc(a.y)}</span>　${esc(a.o)}</dd></div>
+        <div class="row"><dt>人物</dt><dd>${esc(a.b)}</dd></div>
+      </dl>
+      <div class="actions">
+        <button class="act" id="markBtn" aria-pressed="${isMarked(q)}"><svg aria-hidden="true"><use href="#i-bm"/></svg><span>${isMarked(q) ? 'しるしを外す' : 'しるしをつける'}</span></button>
+        <button class="act" id="copyBtn"><svg aria-hidden="true"><use href="#${canShare ? 'i-share' : 'i-copy'}"/></svg><span>${canShare ? '共有する' : '書き写す'}</span></button>
+      </div>${nav}`;
+    card.classList.remove('in'); void card.offsetWidth; card.classList.add('in');
+    $('#markBtn').onclick = () => { const k = key(q); marks.has(k) ? marks.delete(k) : marks.add(k); store.set('shiori.marks', [...marks]); renderCard(); if (state.onlyMarks) renderShelf(); };
+    $('#copyBtn').onclick = async () => {
+      const text = `「${plain(q.t)}」\n― ${q.a}${q.w}`;
+      try {
+        if (canShare) { await navigator.share({ text }); return; }
+        await navigator.clipboard.writeText(text); toast('書き写しました');
+      } catch(e) { if (e && e.name === 'AbortError') return; try { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); toast('書き写しました'); } catch(_) { toast('書き写せませんでした'); } }
+    };
+    if (detail) { $('#backBtn').onclick = () => { state.detail = null; setTab('shelf'); }; }
+    else {
+      $('#prevBtn').onclick = () => { state.offset--; renderCard(); };
+      $('#nextBtn').onclick = () => { if (state.offset < 0) { state.offset++; renderCard(); } };
+      $('#todayBtn').onclick = () => { state.offset = 0; renderCard(); };
+    }
+  }
+
+  // ── 書架 ──
+  const ERAS = [
+    { t: '古代', s: 'Antiquity', max: 500 }, { t: '中世', s: 'Medieval', max: 1500 }, { t: '近世', s: 'Early modern', max: 1800 },
+    { t: '近代', s: '19th century', max: 1900 }, { t: '現代', s: '20th century', max: Infinity }
+  ];
+  const shelfEl = $('#shelf');
+  function renderShelf(){
+    const qn = state.query.trim().toLowerCase();
+    const hit = Q.filter(q => {
+      const a = A[q.a];
+      if (state.region !== 'all' && a.r !== state.region) return false;
+      if (state.onlyMarks && !isMarked(q)) return false;
+      if (qn && !(q.a + q.w + plain(q.t) + (q.x || '') + a.b).toLowerCase().includes(qn)) return false;
+      return true;
+    });
+    if (!hit.length) {
+      shelfEl.innerHTML = `<div class="empty"><div class="motif" aria-hidden="true"><svg viewBox="0 0 200 150"><use href="#m-candle"/></svg></div><p>${state.onlyMarks && !qn ? 'まだ、しるしはありません。<br>心に残った一言に、しるしをつけておけます。' : '見つかりませんでした。<br>別の言葉で探してみてください。'}</p></div>`;
+      return;
+    }
+    const byA = new Map();
+    hit.forEach(q => { if (!byA.has(q.a)) byA.set(q.a, []); byA.get(q.a).push(q); });
+    const authors = [...byA.keys()].sort((x, y) => A[x].born - A[y].born);
+    const expandAll = !!qn || state.onlyMarks;
+    let html = '', lo = -Infinity;
+    ERAS.forEach(e => {
+      const list = authors.filter(n => A[n].born >= lo && A[n].born < e.max); lo = e.max;
+      if (!list.length) return;
+      html += `<section class="era"><h2><span class="jp">${e.t}</span>${e.s}</h2><ul class="authors">`;
+      list.forEach(n => {
+        const a = A[n], qs = byA.get(n), open = expandAll || state.open.has(n);
+        html += `<li class="author${open ? ' open' : ''}" data-a="${esc(n)}"><button class="a-row" aria-expanded="${open}"><span class="nm">${esc(n)}</span><span class="yr">${esc(a.y)}</span><span class="ct">${qs.length}</span></button>
+          <div class="a-body" ${open ? '' : 'hidden'}><p class="a-bio">${esc(a.b)}</p><ul class="qlist">${qs.map(q => `<li><button class="q-row" data-k="${esc(key(q))}"><span class="tx">${withMark(q.t)}</span><span class="wk">${isMarked(q) ? '<svg aria-hidden="true"><use href="#i-mark-s"/></svg>' : ''}${esc(q.w)}</span></button></li>`).join('')}</ul></div></li>`;
+      });
+      html += `</ul></section>`;
+    });
+    shelfEl.innerHTML = html;
+  }
+  shelfEl.addEventListener('click', e => {
+    const row = e.target.closest('.a-row');
+    if (row) { const li = row.parentElement, n = li.dataset.a, open = !li.classList.contains('open'); li.classList.toggle('open', open); row.setAttribute('aria-expanded', open); $('.a-body', li).hidden = !open; open ? state.open.add(n) : state.open.delete(n); return; }
+    const qr = e.target.closest('.q-row');
+    if (qr) { const q = Q.find(x => key(x) === qr.dataset.k); if (q) { state.detail = q; setTab('today', true); } }
+  });
+  $('#q').addEventListener('input', e => { state.query = e.target.value; renderShelf(); });
+  document.querySelectorAll('.chip[data-r]').forEach(b => b.onclick = () => { state.region = b.dataset.r; document.querySelectorAll('.chip[data-r]').forEach(x => x.setAttribute('aria-pressed', x === b)); renderShelf(); });
+  $('#chipMark').onclick = function(){ state.onlyMarks = !state.onlyMarks; this.setAttribute('aria-pressed', state.onlyMarks); renderShelf(); };
+  $('#cntQ').textContent = Q.length; $('#cntA').textContent = Object.keys(A).length;
+
+  // ── タブ ──
+  function setTab(tab, keepDetail){
+    state.tab = tab; if (!keepDetail) state.detail = null;
+    $('#view-today').hidden = tab !== 'today'; $('#view-shelf').hidden = tab !== 'shelf';
+    document.querySelectorAll('.tab').forEach(b => { const on = b.dataset.tab === (state.detail ? 'shelf' : tab); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    if (tab === 'today') renderCard(); else renderShelf();
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('.tab').forEach(b => b.onclick = () => setTab(b.dataset.tab));
+
+  // ── 設定 ──
+  const pop = $('#pop'), gear = $('#gearBtn');
+  function applySize(s){ document.documentElement.dataset.size = s; document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.size === s)); }
+  applySize(store.get('shiori.size', 'm'));
+  document.querySelectorAll('.seg button').forEach(b => b.onclick = () => { applySize(b.dataset.size); store.set('shiori.size', b.dataset.size); });
+  gear.onclick = () => { const open = pop.hidden; pop.hidden = !open; gear.setAttribute('aria-expanded', open); };
+  document.addEventListener('click', e => { if (!pop.hidden && !pop.contains(e.target) && e.target !== gear && !gear.contains(e.target)) { pop.hidden = true; gear.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !pop.hidden) { pop.hidden = true; gear.setAttribute('aria-expanded', 'false'); gear.focus(); }
+    if (state.tab === 'today' && !state.detail && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) {
+      if (e.key === 'ArrowLeft') { state.offset--; renderCard(); }
+      if (e.key === 'ArrowRight' && state.offset < 0) { state.offset++; renderCard(); }
+    }
+  });
+
+  // ── 通知 ──
+  let toastT; function toast(msg){ const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 1800); }
+
+  // ── 日付が変わったら差し替える ──
+  let shown = todayNum();
+  setInterval(() => { const n = todayNum(); if (n !== shown) { shown = n; if (state.tab === 'today' && !state.detail && state.offset === 0) renderCard(); } }, 30000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) { const n = todayNum(); if (n !== shown) { shown = n; state.offset = 0; if (state.tab === 'today' && !state.detail) renderCard(); } } });
+
+  setTab('today');
+})();
+</script>
