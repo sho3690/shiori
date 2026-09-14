@@ -311,9 +311,9 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
   const key = q => q.a + '|' + q.t.slice(0, 14);
 
   // ── 日付 → その日の一言（N日ごとに並びを変え、同じ句が続かないようにする）──
-  const EPOCH = Date.UTC(2026, 0, 1);
-  // 一言は日付が変わった時点（0時）で切り替わる。朝7時に開けば必ず新しい一言になっている。
-  const ROLLOVER_HOUR = 0;
+  const EPOCH = Date.UTC(2025, 11, 31); // 通し日数の起点（2026-09-14 の夜に1日ぶん進めたため、1/1 ではなく前日）
+  // 一言は毎朝7時に切り替わる。夜更かしして0時を過ぎても、朝7時までは同じ一言（一日の区切りは「朝」）。
+  const ROLLOVER_HOUR = 7;
   // 確認用: ?now=2026-09-15T06:59 を付けると、その時刻から時計を進めて表示できる
   const _nowParam = new URLSearchParams(location.search).get('now');
   const _base = _nowParam ? new Date(_nowParam) : null, _loaded = Date.now();
@@ -360,7 +360,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
     const label = state.offset === 0 ? '今日の一言' : state.offset === -1 ? '昨日の一言' : `${-state.offset}日前の一言`;
     const head = detail
       ? `<button class="back" id="backBtn"><svg width="28" height="10" aria-hidden="true"><use href="#i-arrow-l"/></svg>書架に戻る</button>`
-      : `<p class="date"><span class="lbl">${label}</span>${(look() === 'sea' && state.offset === 0) ? '' : `<span class="num">${fmtDate(d)}</span>`}</p>`;
+      : `<p class="date"><span class="lbl">${label}</span>${(look() === 'sea' && state.offset === 0) ? (nowRef().getHours() < ROLLOVER_HOUR ? '<span class="num">朝7時に次の一言へ</span>' : '') : `<span class="num">${fmtDate(d)}</span>`}</p>`;
     const nav = detail ? '' : `<nav class="daynav" aria-label="日付の移動">
         <button class="nav" id="prevBtn"><svg aria-hidden="true"><use href="#i-arrow-l"/></svg><span class="jp">前の日</span></button>
         <button class="nav today" id="todayBtn" ${state.offset === 0 ? 'hidden' : ''}>今日へ戻る</button>
