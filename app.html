@@ -312,8 +312,8 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
 
   // ── 日付 → その日の一言（N日ごとに並びを変え、同じ句が続かないようにする）──
   const EPOCH = Date.UTC(2026, 0, 1);
-  // 一言は毎朝7時に切り替わる。0時〜7時は前日の一言のまま。
-  const ROLLOVER_HOUR = 7;
+  // 一言は日付が変わった時点（0時）で切り替わる。朝7時に開けば必ず新しい一言になっている。
+  const ROLLOVER_HOUR = 0;
   // 確認用: ?now=2026-09-15T06:59 を付けると、その時刻から時計を進めて表示できる
   const _nowParam = new URLSearchParams(location.search).get('now');
   const _base = _nowParam ? new Date(_nowParam) : null, _loaded = Date.now();
@@ -475,7 +475,11 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
   // ── 日付が変わったら差し替える ──
   let shown = todayNum();
   setInterval(() => { const n = todayNum(); if (n !== shown) { shown = n; if (state.tab === 'today' && !state.detail && state.offset === 0) renderCard(); } else if (look() === 'sea' && state.tab === 'today') renderScene(currentQuote()); }, 30000);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) { const n = todayNum(); if (n !== shown) { shown = n; state.offset = 0; if (state.tab === 'today' && !state.detail) renderCard(); } } });
+  // 画面に戻ってきたとき（アプリ切替・スリープ復帰・戻る操作）に日付が変わっていれば描き直す
+  const recheck = () => { const n = todayNum(); if (n !== shown) { shown = n; state.offset = 0; state.detail = null; if (state.tab !== 'today') setTab('today'); else renderCard(); } else if (look() === 'sea' && state.tab === 'today') renderScene(currentQuote()); };
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) recheck(); });
+  window.addEventListener('focus', recheck);
+  window.addEventListener('pageshow', e => { if (e.persisted) recheck(); });
 
   // ── 装い「海辺」: 時間帯の空・風景・あいさつ ──
   const PAL = {
