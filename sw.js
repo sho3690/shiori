@@ -1,6 +1,6 @@
 // 栞 SHIORI — オフラインでも開けるようにする小さな仕組み。
 // 画面と引用データはまずネットワークから取り、つながらないときだけ保存済みのものを出す。
-const VERSION = 'shiori-v3';
+const VERSION = 'shiori-v4';
 const SHELL = ['./', './index.html', './quotes.js', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {

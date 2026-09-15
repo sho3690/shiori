@@ -43,7 +43,7 @@ button:disabled{cursor:default}
 
 /* ── 上部: 歯車・アーチ・銘 ── */
 .top{position:relative;padding-top:18px}
-.gear{position:absolute;right:-6px;top:14px;width:44px;height:44px;display:grid;place-items:center;color:var(--ink-2);border-radius:50%}
+.gear{position:absolute;right:-6px;top:14px;z-index:6;width:44px;height:44px;display:grid;place-items:center;color:var(--ink-2);border-radius:50%}
 .gear:hover{color:var(--ink)}
 .arch{width:min(78%,360px);margin:0 auto;aspect-ratio:1/1.02;border:1px solid var(--rule-strong);border-bottom:0;border-radius:999px 999px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 24px 18px;position:relative}
 .motif{width:74%;color:var(--blue);display:block;margin-bottom:auto;margin-top:16%}
@@ -156,7 +156,7 @@ button:disabled{cursor:default}
   @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 }
 
-/* ══ 装い「海辺」: 淡い帯の風景・幾何学の動物・大きなあいさつ ══ */
+/* ══ 装い「海辺」: 淡い帯の風景・幾何学の動物。html[data-scene] の規則は「森」「星夜」にも共通 ══ */
 html[data-look="sea"]{
   --paper:#F6F7F9; --paper-deep:#E9ECF1; --desk:#D9DDE5;
   --ink:#2B3142; --ink-2:#5F6779; --ink-3:#98A0B0;
@@ -166,39 +166,151 @@ html[data-look="sea"]{
   --serif-lat:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
   --sans:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
 }
-html[data-look="sea"] body::before{opacity:.18}
-html[data-look="sea"] .arch,html[data-look="sea"] .hair{display:none}
+html[data-scene] body::before{opacity:.18}
+html[data-scene] .arch,html[data-scene] .hair{display:none}
 .scene{position:relative;margin:0 -22px;height:clamp(300px,80vw,390px);overflow:hidden;background:#C3D0DF;color:#2B3142}
 .scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .scene-text{position:absolute;left:22px;top:30px;right:70px}
 .hdate{margin:0 0 6px;font-size:1.7rem;font-weight:700;letter-spacing:.04em;line-height:1.2}
 .hsub{margin:0;font-size:.8rem;letter-spacing:.14em;font-variant-numeric:tabular-nums;opacity:.85;font-weight:500}
 .top.night .gear{color:#ECEDF3}
-html[data-look="sea"] .gear{top:12px}
-html[data-look="sea"] .top{padding-top:0}
-html[data-look="sea"] .card{padding-top:24px}
-html[data-look="sea"] .date .lbl{font-size:.78rem;font-weight:500;letter-spacing:.22em}
-html[data-look="sea"] .q-text{font-size:clamp(1.3rem,4.9vw,1.6rem);line-height:1.9;font-weight:500;letter-spacing:.01em}
-html[data-look="sea"] .q-text::before,html[data-look="sea"] .q-text::after{content:none}
-html[data-look="sea"] .q-text mark,html[data-look="sea"] .q-row .tx mark{background:none;padding:0;margin:0}
-html[data-look="sea"] .q-orig{font-style:normal;font-weight:400;font-size:.95rem;line-height:1.7}
-html[data-look="sea"] .q-author{font-weight:700;letter-spacing:.12em}
-html[data-look="sea"] .meta dd .yrs{font-size:1em}
-html[data-look="sea"] .nav{font-size:.9rem;font-weight:500}
-html[data-look="sea"] .chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
-html[data-look="sea"] .chip.mark[aria-pressed="true"]{background:var(--mustard);border-color:var(--mustard);color:var(--ink)}
-html[data-look="sea"] .era h2{font-weight:500}
-html[data-look="sea"] .tabs{gap:0;background:var(--paper);border-top:1px solid var(--rule);padding-top:6px}
-html[data-look="sea"] .tab{border:0;border-radius:0;min-height:68px;gap:6px;padding-top:4px}
-html[data-look="sea"] .tab svg{width:34px;height:34px;padding:7px;border-radius:9px;background:var(--paper-deep);color:var(--ink-2)}
-html[data-look="sea"] .tab .lb{font-size:.72rem;letter-spacing:.2em;font-weight:500}
-html[data-look="sea"] .tab[aria-current="page"] svg{background:var(--blue);color:#fff}
-html[data-look="sea"] .tab[aria-current="page"]::after{content:none}
-html[data-look="sea"] .empty .motif{color:var(--blue)}
-html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
+html[data-scene] .gear{top:12px}
+html[data-scene] .top{padding-top:0}
+html[data-scene] .card{padding-top:24px}
+html[data-scene] .date .lbl{font-size:.78rem;font-weight:500;letter-spacing:.22em}
+html[data-scene] .q-text{font-size:clamp(1.3rem,4.9vw,1.6rem);line-height:1.9;font-weight:500;letter-spacing:.01em}
+html[data-scene] .q-text::before,html[data-scene] .q-text::after{content:none}
+html[data-scene] .q-text mark,html[data-scene] .q-row .tx mark{background:none;padding:0;margin:0}
+html[data-scene] .q-orig{font-style:normal;font-weight:400;font-size:.95rem;line-height:1.7}
+html[data-scene] .q-author{font-weight:700;letter-spacing:.12em}
+html[data-scene] .meta dd .yrs{font-size:1em}
+html[data-scene] .nav{font-size:.9rem;font-weight:500}
+html[data-scene] .chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+html[data-scene] .chip.mark[aria-pressed="true"]{background:var(--mustard);border-color:var(--mustard);color:var(--ink)}
+html[data-scene] .era h2{font-weight:500}
+html[data-scene] .tabs{gap:0;background:var(--paper);border-top:1px solid var(--rule);padding-top:6px}
+html[data-scene] .tab{border:0;border-radius:0;min-height:68px;gap:6px;padding-top:4px}
+html[data-scene] .tab svg{width:34px;height:34px;padding:7px;border-radius:9px;background:var(--paper-deep);color:var(--ink-2)}
+html[data-scene] .tab .lb{font-size:.72rem;letter-spacing:.2em;font-weight:500}
+html[data-scene] .tab[aria-current="page"] svg{background:var(--blue);color:#fff}
+html[data-scene] .tab[aria-current="page"]::after{content:none}
+html[data-scene] .empty .motif{color:var(--blue)}
+html[data-scene] .seg button[aria-pressed="true"]{background:var(--blue)}
 .pop h2+.seg+h2{margin-top:18px}
-.seg.look{grid-template-columns:1fr 1fr}
-@media (min-width:600px){ html[data-look="sea"] .tabs{border-radius:0 0 30px 30px} }
+@media (min-width:600px){ html[data-scene] .tabs{border-radius:0 0 30px 30px} }
+
+/* ══ 装い「森」: 海辺の姉妹版。深緑と苔色、木々と獣の風景 ══ */
+html[data-look="forest"]{
+  --paper:#F3F6F1; --paper-deep:#E4EAE0; --desk:#D3DCCF;
+  --ink:#24322A; --ink-2:#556457; --ink-3:#8C9A8E;
+  --rule:#D5DDD3; --rule-strong:#BCC9BC;
+  --blue:#3F6E52; --mustard:#D8C48E; --mustard-soft:#EAE0BF;
+  --serif-jp:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --serif-lat:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+}
+
+/* ══ 装い「星夜」: 深い紺の空に星と本当の月齢。夜に読むための暗い装い ══ */
+html[data-look="night"]{
+  --paper:#121829; --paper-deep:#1A2238; --desk:#0B0F1C;
+  --ink:#ECEEF6; --ink-2:#B4BBD0; --ink-3:#7F889F;
+  --rule:#2A3350; --rule-strong:#3D4868;
+  --blue:#A9C1F5; --mustard:#E2C46E; --mustard-soft:#6A5A2C;
+  --serif-jp:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --serif-lat:"Cormorant Garamond","Shippori Mincho",Georgia,serif;
+  --sans:"Josefin Sans","Hiragino Sans","Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+html[data-look="night"] body::before{opacity:.08;mix-blend-mode:screen}
+html[data-look="night"] .gear{color:#ECEEF6}
+html[data-look="night"] .q-text{font-size:clamp(1.4rem,5.2vw,1.8rem);line-height:1.85;font-weight:500;letter-spacing:.03em}
+html[data-look="night"] .q-orig{font-family:var(--serif-lat);font-style:italic;font-size:1.05rem;font-weight:500;line-height:1.5}
+html[data-look="night"] .q-author{font-weight:600;letter-spacing:.1em}
+html[data-look="night"] .hdate{font-weight:600;letter-spacing:.06em}
+html[data-look="night"] .nav{font-family:var(--serif-lat);font-size:1.2rem}
+html[data-look="night"] .tab[aria-current="page"] svg{color:var(--paper)}
+html[data-look="night"] .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+html[data-look="night"] .chip.mark[aria-pressed="true"]{background:var(--mustard);border-color:var(--mustard);color:#1A1608}
+html[data-look="night"] .search input{background:#ffffff0f}
+html[data-look="night"] .pop{box-shadow:0 12px 32px -14px rgba(0,0,0,.85)}
+html[data-look="night"] .era h2{font-weight:500}
+@media (min-width:600px){ html[data-look="night"] .app{box-shadow:0 0 0 1px var(--rule-strong),0 30px 70px -36px rgba(0,0,0,.9)} }
+
+/* ══ 装い「墨」: 白い和紙に墨色の明朝、日本語の一言は縦書き。朱の落款をひとつ ══ */
+html[data-look="sumi"]{
+  --paper:#FBFAF6; --paper-deep:#F1EFE8; --desk:#E6E3DA;
+  --ink:#1A1A1A; --ink-2:#4B4B49; --ink-3:#8B8A85;
+  --rule:#DEDCD4; --rule-strong:#C3C0B6;
+  --blue:#3A3A3A; --mustard:#B5382B; --mustard-soft:#EBD9D5; --seal:#B5382B;
+  --serif-jp:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","Shippori Mincho",serif;
+  --serif-lat:"Hiragino Mincho ProN","Cormorant Garamond",Georgia,serif;
+  --sans:"Hiragino Mincho ProN","Yu Mincho","Shippori Mincho",serif;
+}
+html[data-look="sumi"] body::before{opacity:.2}
+html[data-look="sumi"] .arch{display:none}
+html[data-look="sumi"] .top{padding-top:18px;min-height:82px}
+html[data-look="sumi"] .top::before{content:"栞";position:absolute;left:0;top:20px;width:38px;height:38px;background:var(--seal);color:#fff;font-size:1.2rem;font-weight:600;display:grid;place-items:center;border-radius:3px;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 3.5px var(--seal);line-height:1}
+html[data-look="sumi"] .hair{height:4px;margin-top:22px;background:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 8' preserveAspectRatio='none'%3E%3Cpath d='M3,4 C90,2 200,6.5 320,3.5 C430,1 520,5 597,3.5' stroke='%231A1A1A' stroke-width='1.8' fill='none' stroke-linecap='round' opacity='.8'/%3E%3C/svg%3E");background-size:100% 100%}
+html[data-look="sumi"] .date{letter-spacing:.14em}
+html[data-look="sumi"] .date .lbl{letter-spacing:.24em}
+html[data-look="sumi"] .quote{display:flex;flex-direction:column;align-items:stretch}
+html[data-look="sumi"] .q-wrap{writing-mode:vertical-rl;-webkit-writing-mode:vertical-rl;width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;padding-bottom:4px}
+html[data-look="sumi"] .q-text{font-size:clamp(1.35rem,5vw,1.7rem);line-height:2;letter-spacing:.1em;font-weight:500;max-height:min(58vh,26em);margin:0 0 0 auto;padding-left:.15em;text-orientation:mixed;font-feature-settings:"vert","vrt2";text-wrap:wrap}
+html[data-look="sumi"] .q-text::before{content:"「";font-family:inherit;font-size:1em;line-height:inherit;position:static;margin:0}
+html[data-look="sumi"] .q-text::after{content:"」";font-family:inherit;font-size:1em;line-height:inherit;position:static;margin:0}
+html[data-look="sumi"] .q-text mark,html[data-look="sumi"] .q-row .tx mark{background:none;padding:0;margin:0;-webkit-text-emphasis:sesame var(--seal);text-emphasis:sesame var(--seal)}
+html[data-look="sumi"] .q-orig{margin-top:14px;font-style:normal;font-size:.95rem;line-height:1.7;color:var(--ink-2)}
+html[data-look="sumi"] .q-author{justify-content:flex-end;letter-spacing:.2em}
+html[data-look="sumi"] .meta dt{letter-spacing:.3em}
+html[data-look="sumi"] .nav{font-family:var(--serif-jp);font-size:1rem}
+html[data-look="sumi"] .tab[aria-current="page"]::after{background:var(--seal)}
+html[data-look="sumi"] .chip.mark[aria-pressed="true"]{background:var(--seal);border-color:var(--seal);color:#fff}
+
+/* ══ 装い「モダン」: 白地に黒、飾りなし。スイス風の活字だけで見せる ══ */
+html[data-look="mono"]{
+  --paper:#FFFFFF; --paper-deep:#F3F3F3; --desk:#E9E9E9;
+  --ink:#111111; --ink-2:#4A4A4A; --ink-3:#8C8C8C;
+  --rule:#E4E4E4; --rule-strong:#B9B9B9;
+  --blue:#111111; --mustard:#111111; --mustard-soft:#E4E4E4;
+  --serif-jp:"Zen Kaku Gothic New","Hiragino Sans","Helvetica Neue",Arial,sans-serif;
+  --serif-lat:"Helvetica Neue","Zen Kaku Gothic New",Arial,sans-serif;
+  --sans:"Helvetica Neue","Zen Kaku Gothic New",Arial,sans-serif;
+}
+html[data-look="mono"] body::before{display:none}
+html[data-look="mono"] .arch{display:none}
+html[data-look="mono"] .top{padding-top:26px}
+html[data-look="mono"] .top::before{content:"SHIORI";display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.42em;font-weight:700;color:var(--ink);line-height:1;padding-top:6px}
+html[data-look="mono"] .hair{height:2px;background:var(--ink);margin-top:16px}
+html[data-look="mono"] .card{padding-top:22px}
+html[data-look="mono"] .date{display:block;margin-bottom:28px}
+html[data-look="mono"] .date .lbl{display:block;font-family:var(--sans);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+html[data-look="mono"] .date .num{display:block;font-size:clamp(2rem,8vw,2.6rem);font-weight:700;letter-spacing:-.01em;line-height:1.05;color:var(--ink)}
+html[data-look="mono"] .date .num small{font-size:.38em;font-weight:500;letter-spacing:.12em;margin-left:.5em}
+html[data-look="mono"] .q-text{font-size:clamp(1.5rem,6vw,2.1rem);line-height:1.6;font-weight:700;letter-spacing:0}
+html[data-look="mono"] .q-text::before,html[data-look="mono"] .q-text::after{content:none}
+html[data-look="mono"] .q-text mark,html[data-look="mono"] .q-row .tx mark{background:none;padding:0;margin:0}
+html[data-look="mono"] .q-orig{font-style:normal;font-weight:400;font-size:1rem;line-height:1.6;color:var(--ink-2)}
+html[data-look="mono"] .q-author{font-weight:700;letter-spacing:.16em;font-size:.95rem}
+html[data-look="mono"] .meta{border-top:2px solid var(--ink)}
+html[data-look="mono"] .meta dt{font-family:var(--sans);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase}
+html[data-look="mono"] .meta dd .yrs{font-size:1em}
+html[data-look="mono"] .nav{font-family:var(--sans);font-size:.85rem;font-weight:700;letter-spacing:.16em}
+html[data-look="mono"] .nav .jp{font-weight:700}
+html[data-look="mono"] .nav.today{font-family:var(--sans)}
+html[data-look="mono"] .tabs{gap:0;padding-top:8px;background:var(--paper);border-top:2px solid var(--ink)}
+html[data-look="mono"] .tab{border:0;border-radius:0;min-height:64px}
+html[data-look="mono"] .tab .lb{font-weight:700}
+html[data-look="mono"] .chip,html[data-look="mono"] .search input,html[data-look="mono"] .pop,html[data-look="mono"] .seg,html[data-look="mono"] .toast,html[data-look="mono"] .q-row{border-radius:0}
+html[data-look="mono"] .search input{background:#fff}
+html[data-look="mono"] .shelf-top h1{letter-spacing:.1em;font-weight:700}
+html[data-look="mono"] .era h2{color:var(--ink);font-weight:700}
+html[data-look="mono"] .era h2::after{background:var(--ink)}
+@media (min-width:600px){ html[data-look="mono"] .app{border-radius:0;box-shadow:0 0 0 1px var(--ink)} html[data-look="mono"] .tabs{border-radius:0} }
+
+/* 装いの選択（6種を3列×2段） */
+.seg.look{grid-template-columns:repeat(3,1fr)}
+.seg.look button:nth-child(4){border-left:0}
+.seg.look button:nth-child(n+4){border-top:1px solid var(--rule-strong)}
 </style>
 </head>
 <body>
@@ -266,6 +378,56 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
 <path d="M20,132 C50,120 90,120 130,130 C150,134 166,136 182,134"/>
 <use href="#leaf" transform="translate(50,124) rotate(-150)"/><use href="#leaf" transform="translate(74,121) rotate(-120)"/><use href="#leaf" transform="translate(100,123) rotate(-140)"/><use href="#leaf" transform="translate(124,128) rotate(-110)"/><use href="#leaf" transform="translate(146,132) rotate(-140)"/>
 <path d="M30,146 L170,146" stroke-width="1" opacity=".35"/></g></symbol>
+<symbol id="m-compass" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="100" cy="76" r="54"/><circle cx="100" cy="76" r="47" stroke-width="1"/><circle cx="100" cy="76" r="40" fill="url(#hatch2)" stroke="none" opacity=".5"/><circle cx="100" cy="76" r="40" stroke-width="1"/>
+<path d="M100,22 L100,30 M100,122 L100,130 M46,76 L54,76 M146,76 L154,76 M62,38 L67,43 M138,38 L133,43 M62,114 L67,109 M138,114 L133,109" stroke-width="1.2"/>
+<path d="M100,36 L108,76 L100,116 L92,76 Z" fill="#F4EFE4"/><path d="M100,36 L108,76 L100,76 Z" fill="#DDB53E" stroke="none"/><path d="M100,36 L108,76 L100,116 L92,76 Z"/>
+<path d="M64,76 L100,68 L136,76 L100,84 Z" fill="url(#hatch)"/><circle cx="100" cy="76" r="4" fill="#F4EFE4"/>
+<text x="100" y="19" font-family="Cormorant Garamond,serif" font-size="11" text-anchor="middle" fill="currentColor" stroke="none">N</text>
+<path d="M40,140 L160,140" stroke-width="1" opacity=".45"/><path d="M62,145 L138,145" stroke-width=".8" opacity=".3"/></g></symbol>
+<symbol id="m-key" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<g transform="rotate(-28 100 78)">
+<circle cx="52" cy="78" r="22" fill="url(#hatch)"/><circle cx="52" cy="78" r="22"/><circle cx="52" cy="78" r="9" fill="#F4EFE4"/>
+<path d="M44,60 C48,52 56,52 60,60" stroke-width="1"/><path d="M74,74 L164,74 L164,82 L74,82 Z" fill="url(#hatch2)"/><path d="M74,74 L164,74 L164,82 L74,82 Z"/>
+<path d="M164,74 L164,66 L156,66 M148,82 L148,94 L140,94 L140,82 M130,82 L130,90 L122,90 L122,82" />
+<path d="M152,74 L152,82 M108,74 L108,82" stroke-width="1"/>
+</g>
+<path d="M146,36 C150,30 158,30 160,36 C162,42 154,48 148,44" stroke="#DDB53E" stroke-width="1.6"/><path d="M148,44 C144,50 150,56 156,52" stroke="#DDB53E" stroke-width="1.6"/>
+<path d="M40,134 L160,134" stroke-width="1" opacity=".45"/><path d="M60,139 L140,139" stroke-width=".8" opacity=".3"/></g></symbol>
+<symbol id="m-tree" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M100,126 L100,80 M100,96 C90,90 82,84 76,72 M100,88 C110,82 118,76 122,64 M100,80 C94,72 96,62 92,56" stroke-width="1.8"/>
+<path d="M60,66 C48,48 62,26 82,28 C86,14 118,12 124,28 C146,24 158,46 146,64 C158,76 142,92 126,84 C118,96 92,98 84,86 C66,92 52,80 60,66 Z" fill="url(#hatch)"/>
+<path d="M60,66 C48,48 62,26 82,28 C86,14 118,12 124,28 C146,24 158,46 146,64 C158,76 142,92 126,84 C118,96 92,98 84,86 C66,92 52,80 60,66 Z"/>
+<path d="M78,44 C86,40 96,42 100,50 M112,36 C120,38 128,46 128,56 M70,70 C78,66 88,70 92,78" stroke-width="1" opacity=".6"/>
+<path d="M92,44 C96,38 102,38 106,44 C104,50 96,50 92,44 Z" fill="#DDB53E" stroke="none"/><path d="M130,66 C134,60 140,60 144,66 C142,72 134,72 130,66 Z" fill="#DDB53E" stroke="none"/>
+<path d="M40,126 C60,122 80,124 100,126 C120,128 140,124 162,126" stroke-width="1.2"/>
+<path d="M66,134 C90,130 120,132 138,134" stroke-width="1" opacity=".45"/><path d="M80,140 L124,140" stroke-width=".8" opacity=".3"/></g></symbol>
+<symbol id="m-telescope" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M160,20 L166,14 M170,26 L178,24 M154,10 L156,4" stroke-width="1.2" opacity=".7"/><path d="M158,30 L162,20 L166,30 L176,34 L166,38 L162,48 L158,38 L148,34 Z" fill="#DDB53E" stroke="none"/>
+<g transform="rotate(-32 100 84)">
+<path d="M40,80 L84,80 L84,90 L40,90 Z" fill="url(#hatch)"/><path d="M40,80 L84,80 L84,90 L40,90 Z"/><path d="M84,78 L134,78 L134,92 L84,92 Z" fill="url(#hatch2)"/><path d="M84,78 L134,78 L134,92 L84,92 Z"/>
+<path d="M134,76 L160,76 L160,94 L134,94 Z"/><path d="M160,74 L166,74 L166,96 L160,96 Z" fill="url(#hatch)"/><path d="M36,82 L40,82 L40,88 L36,88 Z"/>
+</g>
+<path d="M104,94 L78,138 M104,94 L130,138 M104,94 L104,136" stroke-width="1.6"/><path d="M90,118 L118,118" stroke-width="1"/><circle cx="104" cy="94" r="4" fill="#F4EFE4"/>
+<path d="M50,142 L150,142" stroke-width="1" opacity=".45"/></g></symbol>
+<symbol id="m-bird" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M20,112 C60,104 100,108 140,100 C160,96 172,92 184,84" stroke-width="1.8"/><path d="M60,108 C56,100 50,96 42,96 M124,102 C126,94 132,90 140,92" stroke-width="1.2"/>
+<use href="#leaf" transform="translate(44,100) rotate(-150)"/><use href="#leaf" transform="translate(150,95) rotate(-100)"/>
+<path d="M78,100 C74,84 82,66 100,64 C116,62 128,72 126,88 C124,96 118,102 110,104 L92,104 C86,104 80,104 78,100 Z" fill="url(#hatch)"/>
+<path d="M78,100 C74,84 82,66 100,64 C116,62 128,72 126,88 C124,96 118,102 110,104 L92,104 C86,104 80,104 78,100 Z"/>
+<path d="M92,78 C100,72 114,74 120,84 C114,94 100,96 92,90 Z" fill="url(#hatch2)"/><path d="M92,78 C100,72 114,74 120,84 C114,94 100,96 92,90 Z" stroke-width="1"/>
+<circle cx="102" cy="52" r="12" fill="#F4EFE4"/><circle cx="102" cy="52" r="12"/><path d="M113,50 L124,52 L113,55 Z" fill="#DDB53E"/><circle cx="105" cy="49" r="1.5" fill="currentColor"/>
+<path d="M78,100 L64,116 M82,102 L72,118" stroke-width="1.2"/><path d="M96,104 L96,108 M104,104 L104,108" stroke-width="1.2"/>
+<path d="M40,136 L160,136" stroke-width="1" opacity=".45"/><path d="M60,141 L140,141" stroke-width=".8" opacity=".3"/></g></symbol>
+<symbol id="m-bell" viewBox="0 0 200 150"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M36,20 L164,20 M100,20 L100,34" stroke-width="1.8"/><path d="M36,14 L36,26 M164,14 L164,26" stroke-width="1.2"/>
+<path d="M92,34 C92,28 108,28 108,34 L108,40 L92,40 Z"/>
+<path d="M66,110 C66,82 70,58 100,42 C130,58 134,82 134,110 Z" fill="url(#hatch)"/><path d="M66,110 C66,82 70,58 100,42 C130,58 134,82 134,110 Z"/>
+<path d="M72,84 C86,80 114,80 128,84" stroke-width="1"/><path d="M70,96 C86,92 114,92 130,96" stroke-width="1"/>
+<path d="M58,110 L142,110 L142,120 L58,120 Z" fill="url(#hatch2)"/><path d="M58,110 L142,110 L142,120 L58,120 Z"/>
+<circle cx="100" cy="128" r="7" fill="#DDB53E"/>
+<path d="M44,76 L36,72 M44,92 L34,94 M156,76 L164,72 M156,92 L166,94" stroke-width="1" opacity=".55"/>
+<path d="M40,142 L160,142" stroke-width="1" opacity=".45"/></g></symbol>
 <symbol id="i-gear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/><circle cx="12" cy="12" r="7"/></g></symbol>
 <symbol id="i-bm" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path class="bm-fill" d="M6 3h12v18l-6-4.2L6 21z"/></g></symbol>
 <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="8" y="8" width="12" height="13" rx="1.5"/><path d="M16 8V4.5A1.5 1.5 0 0 0 14.5 3h-9A1.5 1.5 0 0 0 4 4.5v10A1.5 1.5 0 0 0 5.5 16H8"/></g></symbol>
@@ -284,7 +446,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
         <button class="gear" id="gearBtn" aria-label="設定を開く" aria-expanded="false" aria-controls="pop"><svg width="22" height="22"><use href="#i-gear"/></svg></button>
         <div class="pop" id="pop" hidden role="dialog" aria-label="設定">
           <h2>装い</h2>
-          <div class="seg look" role="group" aria-label="装い"><button data-look="sea" aria-pressed="true">海辺</button><button data-look="old" aria-pressed="false">古書</button></div>
+          <div class="seg look" role="group" aria-label="装い"><button data-look="sea" aria-pressed="true">海辺</button><button data-look="old" aria-pressed="false">古書</button><button data-look="night" aria-pressed="false">星夜</button><button data-look="sumi" aria-pressed="false">墨</button><button data-look="forest" aria-pressed="false">森</button><button data-look="mono" aria-pressed="false">モダン</button></div>
           <h2>文字の大きさ</h2>
           <div class="seg" role="group" aria-label="文字の大きさ"><button data-size="s" aria-pressed="false">小</button><button data-size="m" aria-pressed="true">標準</button><button data-size="l" aria-pressed="false">大</button></div>
           <p class="hint"><b>毎朝ひらくには。</b>iPhoneのSafariで共有ボタンを押し「ホーム画面に追加」を選ぶと、アプリのように開けます。</p>
@@ -337,16 +499,33 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
   const quoteDate = d => new Date(d.getTime() - ROLLOVER_HOUR * 3600e3);
   const dayNum = d => { const q = quoteDate(d); return Math.floor((Date.UTC(q.getFullYear(), q.getMonth(), q.getDate()) - EPOCH) / 864e5); };
   const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  // 2026-09-16（通し日数 259）の朝7時から、句を366に増やした新しい並びに入る。
+  // それより前の日は、190句だった頃と同じ並びで表示する（今日の句が急に変わらないため）。
+  const LEGACY_N = 190, CUT = 259, RECENT_DAYS = 90;
   const orders = new Map();
-  function orderFor(block){
-    if (!orders.has(block)) {
-      const r = rng(block * 7919 + 17), o = Q.map((_, i) => i);
-      for (let i = o.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
-      orders.set(block, o);
-    }
-    return orders.get(block);
+  function shuffled(seed, N){
+    const r = rng(seed), o = Array.from({ length: N }, (_, i) => i);
+    for (let i = o.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
+    return o;
   }
-  function quoteForDay(n){ const N = Q.length; const block = Math.floor(n / N); const idx = ((n % N) + N) % N; return Q[orderFor(block)[idx]]; }
+  function legacyIndex(n){ const N = LEGACY_N, block = Math.floor(n / N), idx = ((n % N) + N) % N; const k = 'L' + block; if (!orders.has(k)) orders.set(k, shuffled(block * 7919 + 17, N)); return orders.get(k)[idx]; }
+  function orderFor(block){
+    const k = 'N' + block;
+    if (!orders.has(k)) {
+      let o = shuffled(block * 7919 + 4243, Q.length);
+      if (block === 0) { // 切り替え直前の90日に出た句は最後に回し、しばらく再登場しないようにする
+        const recent = new Set(); for (let n = CUT - RECENT_DAYS; n < CUT; n++) recent.add(legacyIndex(n));
+        o = o.filter(i => !recent.has(i)).concat(o.filter(i => recent.has(i)));
+      }
+      orders.set(k, o);
+    }
+    return orders.get(k);
+  }
+  function quoteForDay(n){
+    if (n < CUT) return Q[legacyIndex(n)];
+    const m = n - CUT, N = Q.length;
+    return Q[orderFor(Math.floor(m / N))[m % N]];
+  }
   const fmtDate = d => `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 ${'日月火水木金土'[d.getDay()]}曜日`;
   const langOf = (q) => {
     const x = q.x || '', o = A[q.a].o;
@@ -371,19 +550,19 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
   function renderCard(){
     const q = currentQuote(), a = A[q.a], detail = !!state.detail, en = q.e || q.x || '';
     motifEl.innerHTML = `<svg viewBox="0 0 200 150"><use href="#m-${q.m}"/></svg>`;
-    if (look() === 'sea') renderScene(q);
+    if (hasScene()) renderScene(q);
     const d = quoteDate(nowRef()); d.setDate(d.getDate() + state.offset);
     const label = state.offset === 0 ? '今日の一言' : state.offset === -1 ? '昨日の一言' : `${-state.offset}日前の一言`;
     const head = detail
       ? `<button class="back" id="backBtn"><svg width="28" height="10" aria-hidden="true"><use href="#i-arrow-l"/></svg>書架に戻る</button>`
-      : `<p class="date"><span class="lbl">${label}</span>${(look() === 'sea' && state.offset === 0) ? (nowRef().getHours() < ROLLOVER_HOUR ? '<span class="num">朝7時に次の一言へ</span>' : '') : `<span class="num">${fmtDate(d)}</span>`}</p>`;
+      : `<p class="date"><span class="lbl">${label}</span>${(hasScene() && state.offset === 0) ? (nowRef().getHours() < ROLLOVER_HOUR ? '<span class="num">朝7時に次の一言へ</span>' : '') : `<span class="num">${look() === 'mono' ? `${d.getMonth()+1}月${d.getDate()}日<small>${'日月火水木金土'[d.getDay()]}曜日</small>` : fmtDate(d)}</span>`}</p>`;
     const nav = detail ? '' : `<nav class="daynav" aria-label="日付の移動">
         <button class="nav" id="prevBtn"><svg aria-hidden="true"><use href="#i-arrow-l"/></svg><span class="jp">前の日</span></button>
         <button class="nav today" id="todayBtn" ${state.offset === 0 ? 'hidden' : ''}>今日へ戻る</button>
         <button class="nav" id="nextBtn" ${state.offset >= 0 ? 'disabled' : ''}><span class="jp">次の日</span><svg aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
       </nav>`;
     card.innerHTML = `${head}
-      <blockquote class="quote"><p class="q-text" lang="ja">${withMark(q.t)}</p>${en ? `<p class="q-orig" lang="en">${esc(en)}</p>` : ''}</blockquote>
+      <blockquote class="quote"><div class="q-wrap"><p class="q-text" lang="ja">${withMark(q.t)}</p></div>${en ? `<p class="q-orig" lang="en">${esc(en)}</p>` : ''}</blockquote>
       <p class="q-author">${esc(q.a)}</p>
       <dl class="meta">
         <div class="row"><dt>出典</dt><dd>${esc(q.w)}</dd></div>
@@ -395,6 +574,7 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
         <button class="act" id="markBtn" aria-pressed="${isMarked(q)}"><svg aria-hidden="true"><use href="#i-bm"/></svg><span>${isMarked(q) ? 'しるしを外す' : 'しるしをつける'}</span></button>
         <button class="act" id="copyBtn"><svg aria-hidden="true"><use href="#${canShare ? 'i-share' : 'i-copy'}"/></svg><span>${canShare ? '共有する' : '書き写す'}</span></button>
       </div>${nav}`;
+    if (look() === 'sumi') fitVertical(q);
     card.classList.remove('in'); void card.offsetWidth; card.classList.add('in');
     $('#markBtn').onclick = () => { const k = key(q); marks.has(k) ? marks.delete(k) : marks.add(k); store.set('shiori.marks', [...marks]); renderCard(); if (state.onlyMarks) renderShelf(); };
     $('#copyBtn').onclick = async () => {
@@ -410,6 +590,14 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
       $('#nextBtn').onclick = () => { if (state.offset < 0) { state.offset++; renderCard(); } };
       $('#todayBtn').onclick = () => { state.offset = 0; renderCard(); };
     }
+  }
+
+  // 墨の縦書き: 句の文字数から段数を決め、各段がほぼ同じ長さになる高さにする
+  function fitVertical(q){
+    const t = $('.q-text', card); if (!t) return;
+    const fs = parseFloat(getComputedStyle(t).fontSize), adv = fs * 1.12, n = plain(q.t).length + 2;
+    const cap = Math.min(innerHeight * .58, fs * 26), perCol = Math.max(6, Math.floor(cap / adv)), cols = Math.ceil(n / perCol);
+    const h = Math.min(cap, Math.ceil(n / cols) * adv + fs * .6) + 'px'; t.style.height = h; $('.q-wrap', card).style.height = h;
   }
 
   // ── 書架 ──
@@ -490,22 +678,42 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
 
   // ── 日付が変わったら差し替える ──
   let shown = todayNum();
-  setInterval(() => { const n = todayNum(); if (n !== shown) { shown = n; if (state.tab === 'today' && !state.detail && state.offset === 0) renderCard(); } else if (look() === 'sea' && state.tab === 'today') renderScene(currentQuote()); }, 30000);
+  setInterval(() => { const n = todayNum(); if (n !== shown) { shown = n; if (state.tab === 'today' && !state.detail && state.offset === 0) renderCard(); } else if (hasScene() && state.tab === 'today') renderScene(currentQuote()); }, 30000);
   // 画面に戻ってきたとき（アプリ切替・スリープ復帰・戻る操作）に日付が変わっていれば描き直す
-  const recheck = () => { const n = todayNum(); if (n !== shown) { shown = n; state.offset = 0; state.detail = null; if (state.tab !== 'today') setTab('today'); else renderCard(); } else if (look() === 'sea' && state.tab === 'today') renderScene(currentQuote()); };
+  const recheck = () => { const n = todayNum(); if (n !== shown) { shown = n; state.offset = 0; state.detail = null; if (state.tab !== 'today') setTab('today'); else renderCard(); } else if (hasScene() && state.tab === 'today') renderScene(currentQuote()); };
   document.addEventListener('visibilitychange', () => { if (!document.hidden) recheck(); });
   window.addEventListener('focus', recheck);
   window.addEventListener('pageshow', e => { if (e.persisted) recheck(); });
 
-  // ── 装い「海辺」: 時間帯の空・風景・あいさつ ──
+  // ── 装い「海辺」「森」「星夜」: 時間帯の空・風景・日付 ──
   const PAL = {
     dawn:  ['#D5D8E5','#DDD6DF','#E7D0C8','#EFCAB2','#F1C4A4','#93A3BF','#6F81A3','#CDB9A1','#2B3142'],
     day:   ['#C3D0DF','#CBD6E2','#D4DCE6','#DDE2EA','#E5E8EE','#8296B5','#5F7093','#C9B7A0','#2B3142'],
     dusk:  ['#BFC3D8','#CDC3D3','#DFC5BE','#ECC3A9','#F0BE9C','#6C7A9C','#46536F','#B29A7D','#2B3142'],
     night: ['#262C45','#2B324E','#313958','#384062','#3F476A','#2A3450','#1F2740','#3A3A48','#ECEDF3']
   };
-  const SCENE_OF = { book:'boat', quill:'gull', lamp:'lighthouse', candle:'lighthouse', hourglass:'whale', laurel:'deer', moon:'moon' };
-  const FIG = {
+  const PAL_FOREST = {
+    dawn:  ['#E3DCE0','#E9DDD6','#EFDAC8','#F0D4B6','#EED1AA','#7E907A','#5C7258','#A8B48F','#24322A'],
+    day:   ['#D5E0D9','#DCE6DE','#E3EAE2','#E9EEE6','#EEF1EA','#7A997D','#597C5F','#B3C29A','#24322A'],
+    dusk:  ['#D6CBC9','#DEC9B9','#E6C6A3','#E9BF92','#E8B886','#6B7C63','#4E6049','#9F8C6A','#24322A'],
+    night: ['#1B2430','#1F2A38','#232F3F','#283546','#2D3B4D','#1E2E27','#17261F','#2B392E','#E6ECE4']
+  };
+  const PAL_NIGHT = { night: ['#0D1327','#101833','#131E3C','#172444','#1B2A4C','#0B1022','#090D1C','#070A16','#E9ECF5'] };
+  // 句の図版(m)ごとに、出しうる風景の候補。どれになるかは句ごとに決まる（同じ句はいつも同じ風景）
+  const SCENES = {
+    sea: { book:['boat','sail','island'], quill:['gull','flock','heron'], lamp:['lighthouse','cottage'], candle:['lighthouse','cottage'], hourglass:['whale','turtle'], laurel:['deer','island'], moon:['moon','flock'],
+           compass:['sail','island'], key:['cottage','turtle'], tree:['island','deer'], telescope:['whale','flock'], bird:['gull','heron','flock'], bell:['lighthouse','cottage'] },
+    forest: { book:['cabin','pines'], quill:['bird','owl'], lamp:['cabin'], candle:['cabin','owl'], hourglass:['lake','pines'], laurel:['deer','fox'], moon:['owl','lake'],
+           compass:['lake','pines'], key:['cabin','fox'], tree:['pines','deer'], telescope:['lake','owl'], bird:['bird','owl'], bell:['cabin','bird'] }
+  };
+  const hash = s => { let h = 7; for (const c of s) h = (h * 31 + c.charCodeAt(0)) | 0; return Math.abs(h); };
+  const DEER = `<rect x="56" y="0" width="14" height="250" fill="#2A2530"/><rect x="298" y="0" width="12" height="250" fill="#2A2530"/><rect x="298" y="44" width="92" height="7" fill="#2A2530"/><rect x="0" y="92" width="70" height="6" fill="#2A2530"/>
+      <rect x="178" y="226" width="6" height="26" fill="#46331F"/><rect x="196" y="226" width="6" height="26" fill="#46331F"/><rect x="226" y="226" width="6" height="26" fill="#46331F"/><rect x="242" y="226" width="6" height="26" fill="#46331F"/>
+      <path d="M168,198 L250,192 L256,214 L242,230 L176,230 L162,214 Z" fill="#6C4F37"/><path d="M176,198 L184,170 L200,166 L206,178 L198,200 Z" fill="#8A6A4C"/>
+      <path d="M170,158 L202,162 L204,172 L186,172 L164,168 Z" fill="#8A6A4C"/><path d="M198,158 L208,146 L204,164 Z" fill="#6C4F37"/>
+      <path d="M192,158 L188,140 M189,148 L180,144 M189,143 L196,132" stroke="#46331F" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <circle cx="172" cy="163" r="1.6" fill="#2A2530"/><path d="M250,196 L258,200 L252,206 Z" fill="#F0EDE6"/>`;
+  const FIGS = { sea: {
     gull: `<path d="M262,250 L262,264 M276,250 L276,264 M255,264 L269,264 M269,264 L283,264" stroke="#E4A59C" stroke-width="2.6" stroke-linecap="round" fill="none"/>
       <path d="M238,236 C238,222 252,212 272,212 C288,212 300,220 302,232 L300,240 C292,250 270,254 250,250 Z" fill="#F2F2F2"/>
       <path d="M252,226 C262,216 288,216 300,226 L294,242 C278,246 262,244 254,240 Z" fill="#C5C7CC"/>
@@ -515,51 +723,131 @@ html[data-look="sea"] .seg button[aria-pressed="true"]{background:var(--blue)}
     boat: `<path d="M150,214 L256,214 L246,230 L160,230 Z" fill="#6E5237"/><path d="M148,212 L258,212 L256,217 L150,217 Z" fill="#8C6B4A"/>
       <rect x="198" y="194" width="10" height="20" rx="2" fill="#2E3448"/><circle cx="203" cy="189" r="5.5" fill="#2E3448"/><path d="M186,206 L172,222" stroke="#8C6B4A" stroke-width="2"/>
       <rect x="156" y="234" width="94" height="2" fill="rgba(255,255,255,.35)"/><rect x="166" y="239" width="74" height="1.5" fill="rgba(255,255,255,.22)"/><rect x="176" y="244" width="54" height="1.5" fill="rgba(255,255,255,.14)"/>`,
-    deer: `<rect x="56" y="0" width="14" height="250" fill="#2A2530"/><rect x="298" y="0" width="12" height="250" fill="#2A2530"/><rect x="298" y="44" width="92" height="7" fill="#2A2530"/><rect x="0" y="92" width="70" height="6" fill="#2A2530"/>
-      <rect x="178" y="226" width="6" height="26" fill="#46331F"/><rect x="196" y="226" width="6" height="26" fill="#46331F"/><rect x="226" y="226" width="6" height="26" fill="#46331F"/><rect x="242" y="226" width="6" height="26" fill="#46331F"/>
-      <path d="M168,198 L250,192 L256,214 L242,230 L176,230 L162,214 Z" fill="#6C4F37"/><path d="M176,198 L184,170 L200,166 L206,178 L198,200 Z" fill="#8A6A4C"/>
-      <path d="M170,158 L202,162 L204,172 L186,172 L164,168 Z" fill="#8A6A4C"/><path d="M198,158 L208,146 L204,164 Z" fill="#6C4F37"/>
-      <path d="M192,158 L188,140 M189,148 L180,144 M189,143 L196,132" stroke="#46331F" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-      <circle cx="172" cy="163" r="1.6" fill="#2A2530"/><path d="M250,196 L258,200 L252,206 Z" fill="#F0EDE6"/>`,
+    deer: DEER,
     lighthouse: `<path d="M294,250 L318,230 L346,236 L370,224 L390,234 L390,250 Z" fill="#55617A"/>
       <path d="M341,139 L200,112 L200,166 Z" fill="rgba(245,217,139,.22)"/>
       <path d="M330,232 L336,150 L356,150 L362,232 Z" fill="#F0EFEA"/><path d="M334,180 L358,180 L359,198 L333,198 Z" fill="#B85C5C"/>
       <rect x="328" y="148" width="36" height="5" fill="#2E3448"/><rect x="337" y="130" width="18" height="18" fill="#2E3448"/><rect x="341" y="134" width="10" height="10" fill="#F5D98B"/><path d="M333,130 L346,118 L359,130 Z" fill="#2E3448"/>`,
     whale: `<path d="M116,232 C146,196 232,196 264,232 Z" fill="#2E3B57"/><path d="M198,208 L208,196 L216,210 Z" fill="#2E3B57"/><path d="M286,236 L300,212 L314,236 Z" fill="#2E3B57"/>
       <circle cx="132" cy="192" r="2" fill="rgba(255,255,255,.8)"/><circle cx="128" cy="182" r="2.6" fill="rgba(255,255,255,.75)"/><circle cx="137" cy="178" r="2" fill="rgba(255,255,255,.7)"/><circle cx="131" cy="170" r="3" fill="rgba(255,255,255,.65)"/><circle cx="124" cy="172" r="1.8" fill="rgba(255,255,255,.6)"/>`,
-    moon: `<circle cx="300" cy="66" r="24" fill="rgba(255,255,255,.85)"/><path d="M0,192 L60,140 L120,178 L172,128 L240,182 L300,150 L390,192 Z" fill="rgba(255,255,255,.28)"/><path d="M0,250 L80,190 L150,236 L220,182 L290,232 L340,204 L390,240 L390,252 L0,252 Z" fill="rgba(46,59,87,.55)"/>`
-  };
+    moon: `<circle cx="300" cy="66" r="24" fill="rgba(255,255,255,.85)"/><path d="M0,192 L60,140 L120,178 L172,128 L240,182 L300,150 L390,192 Z" fill="rgba(255,255,255,.28)"/><path d="M0,250 L80,190 L150,236 L220,182 L290,232 L340,204 L390,240 L390,252 L0,252 Z" fill="rgba(46,59,87,.55)"/>`,
+    heron: `<path d="M118,220 L114,248 M126,220 L129,248" stroke="#3A3A44" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <path d="M96,214 C96,198 112,190 132,192 C146,194 152,204 148,214 L140,226 C124,232 106,230 96,222 Z" fill="#EEF0F2"/>
+      <path d="M104,206 C114,196 136,196 146,206 L140,222 C126,226 112,224 104,218 Z" fill="#B9BEC8"/>
+      <path d="M132,196 C136,184 130,172 122,166 C118,160 122,152 130,152 L134,152" stroke="#EEF0F2" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <circle cx="134" cy="152" r="8" fill="#EEF0F2"/><path d="M141,151 L164,156 L141,157 Z" fill="#E8B84A"/><circle cx="136" cy="150" r="1.5" fill="#2B2B2E"/><path d="M127,148 L122,140" stroke="#2B2B2E" stroke-width="1.5" stroke-linecap="round"/>
+      <rect x="100" y="246" width="44" height="1.5" fill="rgba(255,255,255,.35)"/><rect x="108" y="250" width="30" height="1.5" fill="rgba(255,255,255,.2)"/>`,
+    island: `<path d="M86,118 L106,148 L66,148 Z" fill="#3F6B5A"/><path d="M86,132 L110,162 L62,162 Z" fill="#37604F"/><path d="M86,146 L114,178 L58,178 Z" fill="#2F5445"/><rect x="83" y="176" width="6" height="14" fill="#6E5237"/>
+      <path d="M36,196 L58,182 L84,178 L112,182 L136,196 Z" fill="#4B5568"/><path d="M40,196 L136,196 L132,200 L44,200 Z" fill="#3B4356"/>
+      <rect x="50" y="204" width="76" height="1.5" fill="rgba(255,255,255,.28)"/><rect x="60" y="209" width="56" height="1.5" fill="rgba(255,255,255,.18)"/>
+      <path d="M232,164 L240,170 L248,164 M262,158 L270,164 L278,158" stroke="#6B7186" stroke-width="1.8" stroke-linecap="round" fill="none"/>`,
+    sail: `<rect x="282" y="146" width="4" height="70" fill="#2E3448"/><path d="M288,152 L288,206 L332,206 Z" fill="#F4F1EA"/><path d="M279,160 L279,206 L242,206 Z" fill="#E4DED2"/><path d="M284,146 L300,150 L284,154 Z" fill="#B85C5C"/>
+      <path d="M236,214 L334,214 L322,232 L246,232 Z" fill="#3B3F4E"/><path d="M234,212 L336,212 L334,217 L236,217 Z" fill="#5A5F70"/>
+      <rect x="244" y="236" width="88" height="2" fill="rgba(255,255,255,.35)"/><rect x="254" y="241" width="66" height="1.5" fill="rgba(255,255,255,.22)"/><rect x="264" y="246" width="44" height="1.5" fill="rgba(255,255,255,.14)"/>`,
+    turtle: `<path d="M52,280 C52,258 70,250 84,250 C102,250 118,260 118,280 Z" fill="#4F6B5C"/>
+      <path d="M70,280 L74,262 L94,258 L106,268 L102,280 M74,262 L64,270 M94,258 L98,250 M106,268 L116,266" stroke="rgba(255,255,255,.28)" stroke-width="1.4" fill="none"/>
+      <circle cx="126" cy="278" r="7" fill="#6F8B78"/><circle cx="128" cy="276" r="1.4" fill="#2B2B2E"/>
+      <path d="M56,280 L38,288 L62,286 Z" fill="#6F8B78"/><path d="M112,280 L132,290 L108,286 Z" fill="#6F8B78"/>
+      <rect x="44" y="286" width="90" height="1.5" fill="rgba(0,0,0,.08)"/>`,
+    cottage: `<path d="M280,250 L310,226 L340,232 L368,220 L390,228 L390,250 Z" fill="#55617A"/>
+      <rect x="318" y="196" width="40" height="30" fill="#F0EFEA"/><path d="M312,198 L338,176 L364,198 Z" fill="#B85C5C"/><rect x="352" y="180" width="6" height="12" fill="#2E3448"/>
+      <rect x="334" y="210" width="10" height="16" fill="#2E3448"/><rect x="322" y="204" width="8" height="8" fill="#F5D98B"/><rect x="346" y="204" width="8" height="8" fill="#F5D98B"/>
+      <circle cx="356" cy="172" r="2.5" fill="rgba(255,255,255,.55)"/><circle cx="360" cy="165" r="3" fill="rgba(255,255,255,.4)"/><circle cx="366" cy="157" r="3.5" fill="rgba(255,255,255,.25)"/>`,
+    flock: `<circle cx="96" cy="64" r="22" fill="rgba(255,255,255,.75)"/>
+      <path d="M192,70 L200,76 L208,70 M212,84 L220,90 L228,84 M232,98 L240,104 L248,98 M172,84 L180,90 L188,84 M152,98 L160,104 L168,98 M252,112 L260,118 L268,112 M132,112 L140,118 L148,112" stroke="#6B7186" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <rect x="150" y="234" width="100" height="2" fill="rgba(255,255,255,.3)"/><rect x="60" y="222" width="70" height="1.5" fill="rgba(255,255,255,.22)"/>`
+  }, forest: {
+    deer: DEER,
+    fox: `<path d="M162,246 C140,246 132,226 150,220 C160,218 166,228 168,240 Z" fill="#D9773C"/><circle cx="148" cy="222" r="6" fill="#F6EDE0"/>
+      <path d="M160,250 C160,224 176,212 196,212 C214,212 226,222 226,236 L226,250 Z" fill="#D9773C"/><path d="M186,250 C186,234 194,226 202,226 C212,226 216,236 216,250 Z" fill="#F6EDE0"/>
+      <path d="M194,200 L191,182 L205,196 Z" fill="#D9773C"/><path d="M214,200 L219,182 L206,196 Z" fill="#D9773C"/><circle cx="204" cy="210" r="14" fill="#D9773C"/>
+      <circle cx="211" cy="215" r="6" fill="#F6EDE0"/><circle cx="216" cy="214" r="1.8" fill="#2B2B2E"/><circle cx="206" cy="206" r="1.6" fill="#2B2B2E"/>
+      <rect x="120" y="252" width="130" height="1.5" fill="rgba(0,0,0,.1)"/>`,
+    owl: `<path d="M256,206 L390,178" stroke="#46331F" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M330,190 L344,172 M300,197 L296,186" stroke="#46331F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M306,150 L302,138 L316,146 M334,150 L338,138 L324,146" fill="#7D6A55"/><ellipse cx="320" cy="170" rx="22" ry="28" fill="#7D6A55"/>
+      <path d="M300,168 C300,188 306,198 316,200 L300,200 Z" fill="#5E4E3D"/><path d="M340,168 C340,188 334,198 324,200 L340,200 Z" fill="#5E4E3D"/>
+      <ellipse cx="320" cy="162" rx="16" ry="13" fill="#C9B79C"/><circle cx="313" cy="160" r="5.5" fill="#F4F1EA"/><circle cx="327" cy="160" r="5.5" fill="#F4F1EA"/><circle cx="313" cy="160" r="2.6" fill="#2B2B2E"/><circle cx="327" cy="160" r="2.6" fill="#2B2B2E"/>
+      <path d="M317,166 L320,172 L323,166 Z" fill="#E8B84A"/><path d="M314,198 L312,204 M320,198 L320,204 M326,198 L328,204" stroke="#E8B84A" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <circle cx="90" cy="60" r="20" fill="rgba(255,255,255,.7)"/>`,
+    cabin: `<rect x="130" y="214" width="80" height="36" fill="#8C6B4A"/><path d="M130,222 L210,222 M130,230 L210,230 M130,238 L210,238 M130,246 L210,246" stroke="rgba(0,0,0,.14)" stroke-width="1.5"/>
+      <rect x="196" y="190" width="8" height="18" fill="#4E4038"/><path d="M122,216 L170,182 L218,216 Z" fill="#4E4038"/>
+      <rect x="162" y="226" width="16" height="24" fill="#2E2A26"/><rect x="140" y="224" width="12" height="12" fill="#F5D98B"/><path d="M146,224 L146,236 M140,230 L152,230" stroke="#8C6B4A" stroke-width="1.2"/>
+      <circle cx="202" cy="182" r="2.5" fill="rgba(255,255,255,.55)"/><circle cx="206" cy="175" r="3" fill="rgba(255,255,255,.4)"/><circle cx="212" cy="167" r="3.5" fill="rgba(255,255,255,.25)"/>
+      <path d="M100,252 L120,252 M124,258 L150,258 M154,254 L172,254" stroke="rgba(0,0,0,.12)" stroke-width="3" stroke-linecap="round"/>`,
+    lake: `<path d="M0,196 L70,124 L130,176 L200,112 L270,184 L330,152 L390,196 Z" fill="#4C5E52"/><path d="M200,112 L188,124 L212,124 Z" fill="rgba(255,255,255,.7)"/><path d="M70,124 L60,134 L80,134 Z" fill="rgba(255,255,255,.55)"/>
+      <rect x="0" y="196" width="390" height="44" fill="#8AA9B0"/><rect x="0" y="196" width="390" height="10" fill="rgba(76,94,82,.25)"/>
+      <rect x="40" y="212" width="120" height="1.5" fill="rgba(255,255,255,.35)"/><rect x="200" y="220" width="150" height="1.5" fill="rgba(255,255,255,.3)"/><rect x="90" y="228" width="90" height="1.5" fill="rgba(255,255,255,.2)"/>
+      <path d="M236,214 L296,214 L288,222 L244,222 Z" fill="#6E5237"/><rect x="264" y="200" width="3" height="14" fill="#2E3448"/>`,
+    pines: `<rect x="66" y="196" width="8" height="54" fill="#5B4632"/><path d="M70,96 L100,150 L40,150 Z" fill="#3F6B5A"/><path d="M70,118 L106,178 L34,178 Z" fill="#37604F"/><path d="M70,142 L112,206 L28,206 Z" fill="#2F5445"/>
+      <rect x="126" y="212" width="6" height="40" fill="#5B4632"/><path d="M129,140 L152,180 L106,180 Z" fill="#3F6B5A"/><path d="M129,160 L156,204 L102,204 Z" fill="#37604F"/><path d="M129,180 L160,222 L98,222 Z" fill="#2F5445"/>
+      <rect x="22" y="220" width="5" height="32" fill="#5B4632"/><path d="M24,170 L42,200 L6,200 Z" fill="#37604F"/><path d="M24,188 L46,222 L2,222 Z" fill="#2F5445"/>
+      <circle cx="300" cy="64" r="20" fill="rgba(255,255,255,.7)"/>`,
+    bird: `<path d="M0,238 L124,214" stroke="#46331F" stroke-width="4" stroke-linecap="round" fill="none"/><path d="M60,226 L54,214 M90,220 L96,208" stroke="#46331F" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M62,208 L44,214 L62,214 Z" fill="#3E5E86"/><ellipse cx="80" cy="204" rx="16" ry="11" fill="#5A7A9E"/><path d="M70,206 C76,212 90,214 96,208 L96,214 C88,218 76,216 70,212 Z" fill="#F2E8D8"/>
+      <circle cx="94" cy="194" r="8" fill="#5A7A9E"/><path d="M101,193 L112,196 L101,198 Z" fill="#E8B84A"/><circle cx="96" cy="192" r="1.5" fill="#2B2B2E"/>
+      <path d="M76,214 L74,222 M84,214 L86,222" stroke="#E8B84A" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <path d="M232,90 L240,96 L248,90 M262,104 L270,110 L278,104" stroke="#6B7186" stroke-width="1.8" stroke-linecap="round" fill="none"/>`
+  } };
   const STRIPES = [[190,0,140,2,'#fff',.35],[196,80,310,1.5,'#fff',.25],[203,0,390,2,'#000',.08],[212,150,240,1.5,'#fff',.3],[221,0,90,2,'#fff',.22],[229,60,330,1.5,'#000',.1],[238,200,190,2,'#fff',.18],[246,0,390,1.5,'#000',.1]];
+  const GRASS = [[224,0,120,2,'#000',.07],[232,180,210,1.5,'#000',.07],[242,40,200,2,'#fff',.14],[254,0,390,1.5,'#000',.06],[264,120,180,2,'#fff',.12],[276,0,140,1.5,'#000',.06],[288,220,170,2,'#fff',.1]];
   const STARS = [[30,40],[88,22],[140,58],[210,30],[250,74],[330,26],[366,60],[112,110],[190,124],[300,110],[60,150],[350,150]];
   const period = h => (h >= 5 && h < 9) ? 'dawn' : h < 16 ? 'day' : h < 19 ? 'dusk' : 'night';
-  function sceneSvg(kind, p, night){
+  const moonPhase = d => { const syn = 29.530588853, days = (d.getTime() - Date.UTC(2000, 0, 6, 18, 14)) / 864e5; return (((days % syn) + syn) % syn) / syn; };
+  function moonSvg(cx, cy, r, p){
+    const k = Math.cos(2 * Math.PI * p), rx = (Math.abs(k) * r).toFixed(2), waxing = p < .5;
+    const sweep = waxing ? (k > 0 ? 0 : 1) : (k > 0 ? 1 : 0);
+    return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(255,255,255,.1)"/><path d="M${cx},${cy - r} A${r},${r} 0 0 ${waxing ? 1 : 0} ${cx},${cy + r} A${rx},${r} 0 0 ${sweep} ${cx},${cy - r} Z" fill="#F3F0E4"/>`;
+  }
+  function treeline(fill){
+    let out = ''; for (let i = 0; i < 16; i++) { const x = i * 26 + 4, h = 18 + ((i * 7) % 3) * 9 + ((i * 5) % 2) * 6; out += `<path d="M${x},192 L${x + 13},${192 - h} L${x + 26},192 Z" fill="${fill}"/>`; }
+    return out;
+  }
+  function sceneSvg(world, kind, p, night, seed){
     const ys = [0,38,76,114,152,190,220,250,300];
     let out = ys.slice(0,-1).map((y,i) => `<rect x="0" y="${y}" width="390" height="${ys[i+1]-y+.5}" fill="${p[i]}"/>`).join('');
-    out += STRIPES.map(([y,x,w,h,c,o]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" opacity="${o}"/>`).join('');
-    if (night) out += STARS.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="1.4" fill="#fff" opacity=".8"/>`).join('');
-    return out + (FIG[kind] || FIG.gull);
+    if (world === 'sea') out += STRIPES.map(([y,x,w,h,c,o]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" opacity="${o}"/>`).join('');
+    if (world === 'forest') out += treeline(p[5]) + GRASS.map(([y,x,w,h,c,o]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" opacity="${o}"/>`).join('');
+    if (night && world !== 'night') out += STARS.map(([x,y]) => `<circle cx="${x}" cy="${y}" r="1.4" fill="#fff" opacity=".8"/>`).join('');
+    if (world === 'night') {
+      const r = rng(seed * 131 + 7);
+      for (let i = 0; i < 54; i++) out += `<circle cx="${(r()*390).toFixed(1)}" cy="${(r()*205).toFixed(1)}" r="${(.5 + r()*1.1).toFixed(2)}" fill="#fff" opacity="${(.35 + r()*.6).toFixed(2)}"/>`;
+      for (let i = 0; i < 3; i++) { const x = (40 + r()*320).toFixed(1), y = (110 + r()*80).toFixed(1); out += `<path d="M${x},${y-6} L${x},${+y+6} M${x-6},${y} L${+x+6},${y}" stroke="#fff" stroke-width="1" opacity=".8" stroke-linecap="round"/><circle cx="${x}" cy="${y}" r="1.8" fill="#fff"/>`; }
+      if (r() < .35) { const x = (40 + r()*180).toFixed(1), y = (112 + r()*50).toFixed(1); out += `<path d="M${x},${y} l46,22" stroke="#fff" stroke-width="1.2" opacity=".5" stroke-linecap="round"/>`; }
+      out += moonSvg(292, 78, 24, moonPhase(nowRef()));
+      out += `<path d="M0,262 L60,228 L130,250 L200,216 L270,244 L330,224 L390,246 L390,300 L0,300 Z" fill="#0A0E1C"/>`;
+      out += `<path d="M58,300 L70,244 L82,300 Z M84,300 L94,262 L104,300 Z M300,300 L312,238 L324,300 Z M326,300 L334,268 L342,300 Z" fill="#06091A"/>`;
+      return out;
+    }
+    return out + ((FIGS[world] || {})[kind] || '');
   }
   const sceneEl = $('#scene'), sceneSvgEl = $('#sceneSvg');
   function renderScene(q){
-    const now = nowRef(), dbg = new URLSearchParams(location.search).get('hour');
-    const h = dbg ? Number(dbg) : now.getHours(), per = period(h), p = PAL[per];
-    sceneSvgEl.innerHTML = sceneSvg(SCENE_OF[q.m] || 'gull', p, per === 'night');
+    const now = nowRef(), dbg = new URLSearchParams(location.search).get('hour'), world = look();
+    const h = dbg ? Number(dbg) : now.getHours(), per = world === 'night' ? 'night' : period(h);
+    const p = (world === 'forest' ? PAL_FOREST : world === 'night' ? PAL_NIGHT : PAL)[per];
+    const list = (SCENES[world] || {})[q.m] || Object.keys(FIGS[world] || {});
+    sceneSvgEl.innerHTML = sceneSvg(world, list.length ? list[hash(key(q)) % list.length] : '', p, per === 'night', dayNum(now));
     $('#hdate').textContent = `${now.getMonth()+1}月${now.getDate()}日 ${'日月火水木金土'[now.getDay()]}曜日`;
     $('#hsub').textContent = `${['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][now.getDay()]} • ${['January','February','March','April','May','June','July','August','September','October','November','December'][now.getMonth()]} ${now.getDate()} • ${h}:${String(now.getMinutes()).padStart(2,'0')}`;
     $('.top').classList.toggle('night', per === 'night');
     sceneEl.style.color = p[8]; sceneEl.style.background = p[0];
   }
+  const LOOKS = ['sea','old','night','sumi','forest','mono'], SCENE_LOOKS = ['sea','forest','night'];
   const look = () => document.documentElement.dataset.look || 'sea';
+  const hasScene = () => SCENE_LOOKS.includes(look());
   function applyLook(l){
-    if (l !== 'old') l = 'sea';
+    if (!LOOKS.includes(l)) l = 'sea';
+    const scene = SCENE_LOOKS.includes(l);
     document.documentElement.dataset.look = l;
-    sceneEl.hidden = l !== 'sea'; $('.arch').hidden = l === 'sea'; $('.hair').hidden = l === 'sea';
+    document.documentElement.toggleAttribute('data-scene', scene);
+    sceneEl.hidden = !scene; $('.arch').hidden = l !== 'old'; $('.hair').hidden = scene; if (!scene) $('.top').classList.remove('night');
     document.querySelectorAll('.seg.look button').forEach(b => b.setAttribute('aria-pressed', b.dataset.look === l));
+    const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = getComputedStyle(document.documentElement).getPropertyValue('--paper').trim();
   }
   applyLook(store.get('shiori.look', 'sea'));
   document.querySelectorAll('.seg.look button').forEach(b => b.onclick = () => { applyLook(b.dataset.look); store.set('shiori.look', b.dataset.look); if (state.tab === 'today') renderCard(); });
 
-  window.__shiori = { quoteForDay, dayNum, todayNum, nowRef, current: currentQuote };
+  window.__shiori = { quoteForDay, dayNum, todayNum, nowRef, current: currentQuote, applyLook, moonPhase, sceneSvg, FIGS, PAL, PAL_FOREST, PAL_NIGHT };
   setTab('today');
 })();
 </script>
